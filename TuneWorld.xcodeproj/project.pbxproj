@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D4C240B0E84B6CDE055875F /* Pods_TuneWorld.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF79CD054E2513737541C268 /* Pods_TuneWorld.framework */; };
+		A312C79C94E31B368FAAF12C /* Pods_TuneWorldTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68936A929E6DDD6A3E17F7D9 /* Pods_TuneWorldTests.framework */; };
+		CE67DBE31ECE369200151478 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DBE21ECE369200151478 /* AVFoundation.framework */; };
+		CE67DBE51ECE369A00151478 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DBE41ECE369A00151478 /* SystemConfiguration.framework */; };
+		CE67DC301ECE47D300151478 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DC2D1ECE47D300151478 /* SpotifyAudioPlayback.framework */; };
+		CE67DC311ECE47D300151478 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DC2E1ECE47D300151478 /* SpotifyAuthentication.framework */; };
+		CE67DC321ECE47D300151478 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DC2F1ECE47D300151478 /* SpotifyMetadata.framework */; };
 		CED3B5521ECA56C700D1FBD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */; };
 		CED3B5541ECA56C700D1FBD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5531ECA56C700D1FBD4 /* ViewController.swift */; };
 		CED3B5571ECA56C700D1FBD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3B5551ECA56C700D1FBD4 /* Main.storyboard */; };
@@ -15,6 +22,7 @@
 		CED3B55F1ECA56C700D1FBD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */; };
 		CED3B56A1ECA56C700D1FBD4 /* TuneWorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5691ECA56C700D1FBD4 /* TuneWorldTests.swift */; };
 		CED3B5751ECA56C700D1FBD4 /* TuneWorldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5741ECA56C700D1FBD4 /* TuneWorldUITests.swift */; };
+		FFAFE050EC190444829A4E20 /* Pods_TuneWorldUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44124069BD6513866BCBE7B /* Pods_TuneWorldUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2107E0F181242542AB233DA7 /* Pods-TuneWorldUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorldUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorldUITests/Pods-TuneWorldUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		68936A929E6DDD6A3E17F7D9 /* Pods_TuneWorldTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuneWorldTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B7DF7B7DAF1EDBB523801D8 /* Pods-TuneWorld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorld.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorld/Pods-TuneWorld.debug.xcconfig"; sourceTree = "<group>"; };
+		8675A18A41A99C86AD69C205 /* Pods-TuneWorldTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorldTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorldTests/Pods-TuneWorldTests.release.xcconfig"; sourceTree = "<group>"; };
+		95A3C4FB9283990A9C1FD647 /* Pods-TuneWorldTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorldTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorldTests/Pods-TuneWorldTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9D1A3EB6DAC9C5C4806FF122 /* Pods-TuneWorldUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorldUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorldUITests/Pods-TuneWorldUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C44124069BD6513866BCBE7B /* Pods_TuneWorldUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuneWorldUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE67DBE21ECE369200151478 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CE67DBE41ECE369A00151478 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CE67DC2D1ECE47D300151478 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		CE67DC2E1ECE47D300151478 /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		CE67DC2F1ECE47D300151478 /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TuneWorld-Bridging-Header.h"; sourceTree = "<group>"; };
 		CED3B54E1ECA56C700D1FBD4 /* TuneWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TuneWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CED3B5531ECA56C700D1FBD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +70,8 @@
 		CED3B5701ECA56C700D1FBD4 /* TuneWorldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TuneWorldUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3B5741ECA56C700D1FBD4 /* TuneWorldUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuneWorldUITests.swift; sourceTree = "<group>"; };
 		CED3B5761ECA56C700D1FBD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7ABD93CF9F57A6ADC0D0914 /* Pods-TuneWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorld/Pods-TuneWorld.release.xcconfig"; sourceTree = "<group>"; };
+		FF79CD054E2513737541C268 /* Pods_TuneWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuneWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +79,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE67DC311ECE47D300151478 /* SpotifyAuthentication.framework in Frameworks */,
+				CE67DBE51ECE369A00151478 /* SystemConfiguration.framework in Frameworks */,
+				CE67DC301ECE47D300151478 /* SpotifyAudioPlayback.framework in Frameworks */,
+				CE67DBE31ECE369200151478 /* AVFoundation.framework in Frameworks */,
+				CE67DC321ECE47D300151478 /* SpotifyMetadata.framework in Frameworks */,
+				3D4C240B0E84B6CDE055875F /* Pods_TuneWorld.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A312C79C94E31B368FAAF12C /* Pods_TuneWorldTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +100,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAFE050EC190444829A4E20 /* Pods_TuneWorldUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24E79A3DEC9E091AD861E14E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CE67DC2D1ECE47D300151478 /* SpotifyAudioPlayback.framework */,
+				CE67DC2E1ECE47D300151478 /* SpotifyAuthentication.framework */,
+				CE67DC2F1ECE47D300151478 /* SpotifyMetadata.framework */,
+				CE67DBE41ECE369A00151478 /* SystemConfiguration.framework */,
+				CE67DBE21ECE369200151478 /* AVFoundation.framework */,
+				FF79CD054E2513737541C268 /* Pods_TuneWorld.framework */,
+				68936A929E6DDD6A3E17F7D9 /* Pods_TuneWorldTests.framework */,
+				C44124069BD6513866BCBE7B /* Pods_TuneWorldUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CED3B5451ECA56C700D1FBD4 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +129,8 @@
 				CED3B5681ECA56C700D1FBD4 /* TuneWorldTests */,
 				CED3B5731ECA56C700D1FBD4 /* TuneWorldUITests */,
 				CED3B54F1ECA56C700D1FBD4 /* Products */,
+				E0AA23A6AA89F70A20BA0FBA /* Pods */,
+				24E79A3DEC9E091AD861E14E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +153,7 @@
 				CED3B55B1ECA56C700D1FBD4 /* Assets.xcassets */,
 				CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */,
 				CED3B5601ECA56C700D1FBD4 /* Info.plist */,
+				CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */,
 				CED3B5581ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld */,
 			);
 			path = TuneWorld;
@@ -128,6 +177,19 @@
 			path = TuneWorldUITests;
 			sourceTree = "<group>";
 		};
+		E0AA23A6AA89F70A20BA0FBA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7B7DF7B7DAF1EDBB523801D8 /* Pods-TuneWorld.debug.xcconfig */,
+				D7ABD93CF9F57A6ADC0D0914 /* Pods-TuneWorld.release.xcconfig */,
+				95A3C4FB9283990A9C1FD647 /* Pods-TuneWorldTests.debug.xcconfig */,
+				8675A18A41A99C86AD69C205 /* Pods-TuneWorldTests.release.xcconfig */,
+				2107E0F181242542AB233DA7 /* Pods-TuneWorldUITests.debug.xcconfig */,
+				9D1A3EB6DAC9C5C4806FF122 /* Pods-TuneWorldUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CED3B5791ECA56C700D1FBD4 /* Build configuration list for PBXNativeTarget "TuneWorld" */;
 			buildPhases = (
+				18E8A9C4B22951ADCEB0632B /* [CP] Check Pods Manifest.lock */,
 				CED3B54A1ECA56C700D1FBD4 /* Sources */,
 				CED3B54B1ECA56C700D1FBD4 /* Frameworks */,
 				CED3B54C1ECA56C700D1FBD4 /* Resources */,
+				E0C2AF3B0DFE37E5E0EFAD4A /* [CP] Embed Pods Frameworks */,
+				1BC6F0E72C1682E0CE64897C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -152,9 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CED3B57C1ECA56C700D1FBD4 /* Build configuration list for PBXNativeTarget "TuneWorldTests" */;
 			buildPhases = (
+				C196128CE08E4BCDAF41AA56 /* [CP] Check Pods Manifest.lock */,
 				CED3B5611ECA56C700D1FBD4 /* Sources */,
 				CED3B5621ECA56C700D1FBD4 /* Frameworks */,
 				CED3B5631ECA56C700D1FBD4 /* Resources */,
+				C5BE859468C315C9636F9BFE /* [CP] Embed Pods Frameworks */,
+				AAA24E9C42BC5061B4CD198D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -170,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CED3B57F1ECA56C700D1FBD4 /* Build configuration list for PBXNativeTarget "TuneWorldUITests" */;
 			buildPhases = (
+				29FEF52F6889CFF9F4A32E82 /* [CP] Check Pods Manifest.lock */,
 				CED3B56C1ECA56C700D1FBD4 /* Sources */,
 				CED3B56D1ECA56C700D1FBD4 /* Frameworks */,
 				CED3B56E1ECA56C700D1FBD4 /* Resources */,
+				F86B4608D135E29E93B71596 /* [CP] Embed Pods Frameworks */,
+				E3CCEA6D3AB87AF055905857 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -259,6 +330,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18E8A9C4B22951ADCEB0632B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1BC6F0E72C1682E0CE64897C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TuneWorld/Pods-TuneWorld-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		29FEF52F6889CFF9F4A32E82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AAA24E9C42BC5061B4CD198D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TuneWorldTests/Pods-TuneWorldTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C196128CE08E4BCDAF41AA56 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C5BE859468C315C9636F9BFE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TuneWorldTests/Pods-TuneWorldTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0C2AF3B0DFE37E5E0EFAD4A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TuneWorld/Pods-TuneWorld-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3CCEA6D3AB87AF055905857 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TuneWorldUITests/Pods-TuneWorldUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F86B4608D135E29E93B71596 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TuneWorldUITests/Pods-TuneWorldUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CED3B54A1ECA56C700D1FBD4 /* Sources */ = {
@@ -417,32 +626,69 @@
 		};
 		CED3B57A1ECA56C700D1FBD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B7DF7B7DAF1EDBB523801D8 /* Pods-TuneWorld.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZVWGFCY28P;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TuneWorld/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = austintucker.TuneWorld;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"FBSDKShareKit\"",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.austintucker.TuneWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TuneWorld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		CED3B57B1ECA56C700D1FBD4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7ABD93CF9F57A6ADC0D0914 /* Pods-TuneWorld.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZVWGFCY28P;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TuneWorld/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = austintucker.TuneWorld;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"Bolts\"",
+					"-framework",
+					"\"FBSDKCoreKit\"",
+					"-framework",
+					"\"FBSDKLoginKit\"",
+					"-framework",
+					"\"FBSDKShareKit\"",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.austintucker.TuneWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TuneWorld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		CED3B57D1ECA56C700D1FBD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95A3C4FB9283990A9C1FD647 /* Pods-TuneWorldTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -458,6 +704,7 @@
 		};
 		CED3B57E1ECA56C700D1FBD4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8675A18A41A99C86AD69C205 /* Pods-TuneWorldTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -473,6 +720,7 @@
 		};
 		CED3B5801ECA56C700D1FBD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2107E0F181242542AB233DA7 /* Pods-TuneWorldUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = ZVWGFCY28P;
@@ -487,6 +735,7 @@
 		};
 		CED3B5811ECA56C700D1FBD4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D1A3EB6DAC9C5C4806FF122 /* Pods-TuneWorldUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = ZVWGFCY28P;
@@ -518,6 +767,7 @@
 				CED3B57B1ECA56C700D1FBD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CED3B57C1ECA56C700D1FBD4 /* Build configuration list for PBXNativeTarget "TuneWorldTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +776,7 @@
 				CED3B57E1ECA56C700D1FBD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CED3B57F1ECA56C700D1FBD4 /* Build configuration list for PBXNativeTarget "TuneWorldUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +785,7 @@
 				CED3B5811ECA56C700D1FBD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
