@@ -15,13 +15,16 @@
 		CE67DC311ECE47D300151478 /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DC2E1ECE47D300151478 /* SpotifyAuthentication.framework */; };
 		CE67DC321ECE47D300151478 /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE67DC2F1ECE47D300151478 /* SpotifyMetadata.framework */; };
 		CED3B5521ECA56C700D1FBD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */; };
-		CED3B5541ECA56C700D1FBD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5531ECA56C700D1FBD4 /* ViewController.swift */; };
 		CED3B5571ECA56C700D1FBD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3B5551ECA56C700D1FBD4 /* Main.storyboard */; };
 		CED3B55A1ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5581ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld */; };
 		CED3B55C1ECA56C700D1FBD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED3B55B1ECA56C700D1FBD4 /* Assets.xcassets */; };
 		CED3B55F1ECA56C700D1FBD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */; };
 		CED3B56A1ECA56C700D1FBD4 /* TuneWorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5691ECA56C700D1FBD4 /* TuneWorldTests.swift */; };
 		CED3B5751ECA56C700D1FBD4 /* TuneWorldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5741ECA56C700D1FBD4 /* TuneWorldUITests.swift */; };
+		D98AC1281ECE970F004DBC29 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1261ECE970F004DBC29 /* AlbumTableViewCell.swift */; };
+		D98AC1291ECE970F004DBC29 /* AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98AC1271ECE970F004DBC29 /* AlbumTableViewCell.xib */; };
+		D98AC12B1ECEA7B4004DBC29 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */; };
+		D98AC12D1ECEA7CE004DBC29 /* WorldMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */; };
 		FFAFE050EC190444829A4E20 /* Pods_TuneWorldUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44124069BD6513866BCBE7B /* Pods_TuneWorldUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +61,6 @@
 		CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TuneWorld-Bridging-Header.h"; sourceTree = "<group>"; };
 		CED3B54E1ECA56C700D1FBD4 /* TuneWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TuneWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CED3B5531ECA56C700D1FBD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CED3B5561ECA56C700D1FBD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CED3B5591ECA56C700D1FBD4 /* TuneWorld.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TuneWorld.xcdatamodel; sourceTree = "<group>"; };
 		CED3B55B1ECA56C700D1FBD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,6 +73,10 @@
 		CED3B5741ECA56C700D1FBD4 /* TuneWorldUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TuneWorldUITests.swift; sourceTree = "<group>"; };
 		CED3B5761ECA56C700D1FBD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7ABD93CF9F57A6ADC0D0914 /* Pods-TuneWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorld/Pods-TuneWorld.release.xcconfig"; sourceTree = "<group>"; };
+		D98AC1261ECE970F004DBC29 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlbumTableViewCell.swift; path = ../AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		D98AC1271ECE970F004DBC29 /* AlbumTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AlbumTableViewCell.xib; path = ../AlbumTableViewCell.xib; sourceTree = "<group>"; };
+		D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
+		D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldMapViewController.swift; sourceTree = "<group>"; };
 		FF79CD054E2513737541C268 /* Pods_TuneWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuneWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,14 +153,17 @@
 		CED3B5501ECA56C700D1FBD4 /* TuneWorld */ = {
 			isa = PBXGroup;
 			children = (
+				D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */,
+				D98AC1261ECE970F004DBC29 /* AlbumTableViewCell.swift */,
+				D98AC1271ECE970F004DBC29 /* AlbumTableViewCell.xib */,
 				CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */,
-				CED3B5531ECA56C700D1FBD4 /* ViewController.swift */,
 				CED3B5551ECA56C700D1FBD4 /* Main.storyboard */,
 				CED3B55B1ECA56C700D1FBD4 /* Assets.xcassets */,
 				CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */,
 				CED3B5601ECA56C700D1FBD4 /* Info.plist */,
 				CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */,
 				CED3B5581ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld */,
+				D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */,
 			);
 			path = TuneWorld;
 			sourceTree = "<group>";
@@ -312,6 +321,7 @@
 				CED3B55F1ECA56C700D1FBD4 /* LaunchScreen.storyboard in Resources */,
 				CED3B55C1ECA56C700D1FBD4 /* Assets.xcassets in Resources */,
 				CED3B5571ECA56C700D1FBD4 /* Main.storyboard in Resources */,
+				D98AC1291ECE970F004DBC29 /* AlbumTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,8 +485,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED3B55A1ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld in Sources */,
-				CED3B5541ECA56C700D1FBD4 /* ViewController.swift in Sources */,
+				D98AC12B1ECEA7B4004DBC29 /* AlbumTableViewController.swift in Sources */,
+				D98AC12D1ECEA7CE004DBC29 /* WorldMapViewController.swift in Sources */,
 				CED3B5521ECA56C700D1FBD4 /* AppDelegate.swift in Sources */,
+				D98AC1281ECE970F004DBC29 /* AlbumTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,7 +662,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.austintucker.TuneWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TuneWorld-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "./TuneWorld/TuneWorld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -681,7 +693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.austintucker.TuneWorld;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "TuneWorld-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "./TuneWorld/TuneWorld-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -12,5 +12,6 @@
 #import <SpotifyAuthentication/SpotifyAuthentication.h>
 #import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
 #import <SafariServices/SafariServices.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #endif /* TuneWorldBridgingHeader_h */

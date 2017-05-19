@@ -10,13 +10,41 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate {
 
     var window: UIWindow?
-
+    var auth : SPTAuth?
+    var player: SPTAudioStreamingController?
+    var authViewController: UIViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+//        // Override point for customization after application launch.
+//         auth = SPTAuth.defaultInstance()
+//         player = SPTAudioStreamingController.sharedInstance()
+//         // The client ID you got from the developer site
+//         auth?.clientID = "492517f79b4445a693a31aed968fe484"
+//         // The redirect URL as you entered it at the developer site
+//         auth?.redirectURL = URL(string: "tuneworldlogin://callback")
+//         // Setting the `sessionUserDefaultsKey` enables SPTAuth to automatically store the session object for future use.
+//         auth?.sessionUserDefaultsKey = "current_session"
+//         // Set the scopes you need the user to authorize. `SPTAuthStreamingScope` is required for playing audio.
+//         auth?.requestedScopes = [SPTAuthStreamingScope]
+//         
+//         // Become the streaming controller delegate
+//         player?.delegate = self;
+//         
+//         // Start up the streaming controller.
+//        do {
+//            try player?.start(withClientId: auth?.clientID)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//        
+//        
+//         // Start authenticating when the app is finished launching
+//        DispatchQueue.main.async {
+//            self.startAuthenticationFlow()
+//        }
         return true
     }
 
@@ -73,6 +101,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return container
     }()
 
+    //MARK: - Spotify Helper Functions 
+//    func startAuthenticationFlow() {
+//    // Check if we could use the access token we already have
+//        if let session = auth?.session {
+//            if (session.isValid()) {
+//                // Use it to log in
+//                //[self startLoginFlow];
+//            } else {
+//                // Get the URL to the Spotify authorization portal
+//                let authURL : URL = auth!.spotifyAppAuthenticationURL()
+//                // Present in a SafariViewController
+//                authViewController = SFSafariViewController(url: authURL)
+//                window?.rootViewController = authViewController
+//            }
+//        }
+//    }
+    
+    
     // MARK: - Core Data Saving support
 
     func saveContext () {
