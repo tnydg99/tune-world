@@ -11,6 +11,9 @@ import MapKit
 
 class WorldMapViewController: UIViewController {
 
+    @IBOutlet weak var worldMapView: MKMapView!
+    @IBOutlet weak var spotifyPlayerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,12 +23,6 @@ class WorldMapViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func favoritesButtonPressed(_ sender: UIBarButtonItem) {
-        if let albumTableVC = storyboard?.instantiateViewController(withIdentifier: "AlbumTableViewController") as? AlbumTableViewController {
-            self.navigationController?.pushViewController(albumTableVC, animated: true)
-        }
     }
     
 
