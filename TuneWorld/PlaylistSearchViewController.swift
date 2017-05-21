@@ -1,5 +1,5 @@
 //
-//  WorldMapViewController.swift
+//  PlaylistSearchViewController.swift
 //  TuneWorld
 //
 //  Created by Austin Tucker on 5/19/17.
@@ -7,17 +7,12 @@
 //
 
 import UIKit
-import MapKit
 
-class WorldMapViewController: UIViewController {
+class PlaylistSearchViewController: UIViewController {
 
-    @IBOutlet weak var worldMapView: MKMapView!
-    @IBOutlet weak var spotifyPlayerView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        worldMapView.isZoomEnabled = false
-        worldMapView.isRotateEnabled = false
+
         // Do any additional setup after loading the view.
     }
 
@@ -26,6 +21,9 @@ class WorldMapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func newPlaylistButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "toAddPlaylistSegue", sender: sender)
+    }
 
     /*
     // MARK: - Navigation

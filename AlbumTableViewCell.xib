@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofZ-6R-lZq">
-                        <rect key="frame" x="104" y="0.0" width="46" height="21"/>
+                        <rect key="frame" x="103" y="8" width="46" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="UWZ-0Q-oRR"/>
                             <constraint firstAttribute="width" constant="46" id="reA-YL-7VD"/>
@@ -35,8 +35,17 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Filler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFR-Iv-qwP">
+                        <rect key="frame" x="157" y="8" width="156" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="RcH-em-DUk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSf-D8-sQt">
-                        <rect key="frame" x="104" y="29" width="47" height="21"/>
+                        <rect key="frame" x="103" y="40" width="47" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="zw3-Zp-9iW"/>
                         </constraints>
@@ -44,17 +53,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Filler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CvQ-NX-7bt">
-                        <rect key="frame" x="162" y="29" width="156" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="gWg-8m-gv3"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNu-OH-vBz">
-                        <rect key="frame" x="104" y="58" width="56" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNu-OH-vBz">
+                        <rect key="frame" x="104" y="71" width="56" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Kda-9f-MBm"/>
                         </constraints>
@@ -62,8 +62,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Filler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3e-oc-097">
-                        <rect key="frame" x="162" y="58" width="156" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3e-oc-097">
+                        <rect key="frame" x="162" y="71" width="156" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="156" id="68e-YC-OPf"/>
                             <constraint firstAttribute="height" constant="21" id="kad-DH-jag"/>
@@ -72,10 +72,10 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Filler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFR-Iv-qwP">
-                        <rect key="frame" x="162" y="0.0" width="156" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Filler" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CvQ-NX-7bt">
+                        <rect key="frame" x="157" y="39" width="156" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="RcH-em-DUk"/>
+                            <constraint firstAttribute="height" constant="21" id="gWg-8m-gv3"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -85,19 +85,19 @@
                 <constraints>
                     <constraint firstItem="a3e-oc-097" firstAttribute="width" secondItem="CvQ-NX-7bt" secondAttribute="width" id="491-EK-UFu"/>
                     <constraint firstItem="cFR-Iv-qwP" firstAttribute="top" secondItem="ofZ-6R-lZq" secondAttribute="top" id="49W-Hg-m1o"/>
-                    <constraint firstItem="CvQ-NX-7bt" firstAttribute="top" secondItem="PSf-D8-sQt" secondAttribute="top" id="6bq-NK-Gbk"/>
+                    <constraint firstItem="CvQ-NX-7bt" firstAttribute="top" secondItem="PSf-D8-sQt" secondAttribute="top" constant="-1" id="6bq-NK-Gbk"/>
                     <constraint firstItem="PSf-D8-sQt" firstAttribute="leading" secondItem="ofZ-6R-lZq" secondAttribute="leading" id="8Ek-z2-vUU"/>
                     <constraint firstItem="a3e-oc-097" firstAttribute="top" secondItem="VNu-OH-vBz" secondAttribute="top" id="AMU-ya-Y0Z"/>
-                    <constraint firstItem="CvQ-NX-7bt" firstAttribute="top" secondItem="cFR-Iv-qwP" secondAttribute="bottom" constant="8" id="CTr-AJ-AMo"/>
-                    <constraint firstItem="a3e-oc-097" firstAttribute="leading" secondItem="CvQ-NX-7bt" secondAttribute="leading" id="GrF-4f-AaD"/>
-                    <constraint firstItem="ofZ-6R-lZq" firstAttribute="leading" secondItem="ouR-V4-XBu" secondAttribute="trailing" constant="4" id="PPd-aa-gxn"/>
-                    <constraint firstItem="a3e-oc-097" firstAttribute="top" secondItem="CvQ-NX-7bt" secondAttribute="bottom" constant="8" id="S72-kU-Cha"/>
-                    <constraint firstItem="PSf-D8-sQt" firstAttribute="leading" secondItem="ouR-V4-XBu" secondAttribute="trailing" constant="4" id="bRf-S8-hMr"/>
+                    <constraint firstItem="CvQ-NX-7bt" firstAttribute="top" secondItem="cFR-Iv-qwP" secondAttribute="bottom" constant="10" id="CTr-AJ-AMo"/>
+                    <constraint firstItem="a3e-oc-097" firstAttribute="leading" secondItem="CvQ-NX-7bt" secondAttribute="leading" constant="5" id="GrF-4f-AaD"/>
+                    <constraint firstItem="ofZ-6R-lZq" firstAttribute="leading" secondItem="ouR-V4-XBu" secondAttribute="trailing" constant="3" id="PPd-aa-gxn"/>
+                    <constraint firstItem="a3e-oc-097" firstAttribute="top" secondItem="CvQ-NX-7bt" secondAttribute="bottom" constant="11" id="S72-kU-Cha"/>
+                    <constraint firstItem="PSf-D8-sQt" firstAttribute="leading" secondItem="ouR-V4-XBu" secondAttribute="trailing" constant="3" id="bRf-S8-hMr"/>
                     <constraint firstItem="VNu-OH-vBz" firstAttribute="leading" secondItem="ouR-V4-XBu" secondAttribute="trailing" constant="4" id="df6-Da-zYQ"/>
                     <constraint firstItem="CvQ-NX-7bt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PSf-D8-sQt" secondAttribute="trailing" constant="5" id="dz5-b6-VmG"/>
-                    <constraint firstItem="PSf-D8-sQt" firstAttribute="top" secondItem="ofZ-6R-lZq" secondAttribute="bottom" constant="8" id="gQE-JZ-0ra"/>
-                    <constraint firstItem="VNu-OH-vBz" firstAttribute="leading" secondItem="PSf-D8-sQt" secondAttribute="leading" id="hV2-t0-k7R"/>
-                    <constraint firstItem="VNu-OH-vBz" firstAttribute="top" secondItem="PSf-D8-sQt" secondAttribute="bottom" constant="8" id="jVQ-k9-9ku"/>
+                    <constraint firstItem="PSf-D8-sQt" firstAttribute="top" secondItem="ofZ-6R-lZq" secondAttribute="bottom" constant="11" id="gQE-JZ-0ra"/>
+                    <constraint firstItem="VNu-OH-vBz" firstAttribute="leading" secondItem="PSf-D8-sQt" secondAttribute="leading" constant="1" id="hV2-t0-k7R"/>
+                    <constraint firstItem="VNu-OH-vBz" firstAttribute="top" secondItem="PSf-D8-sQt" secondAttribute="bottom" constant="10" id="jVQ-k9-9ku"/>
                     <constraint firstItem="CvQ-NX-7bt" firstAttribute="width" secondItem="cFR-Iv-qwP" secondAttribute="width" id="oJB-fW-nVl"/>
                     <constraint firstItem="cFR-Iv-qwP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ofZ-6R-lZq" secondAttribute="trailing" constant="5" id="sV3-lB-b4Q"/>
                     <constraint firstItem="a3e-oc-097" firstAttribute="leading" secondItem="VNu-OH-vBz" secondAttribute="trailing" constant="2" id="ukh-La-JlH"/>
@@ -106,11 +106,11 @@
             </tableViewCellContentView>
             <constraints>
                 <constraint firstItem="ouR-V4-XBu" firstAttribute="leading" secondItem="KGk-i7-Jjw" secondAttribute="leading" id="5f3-3x-qZC"/>
-                <constraint firstItem="ofZ-6R-lZq" firstAttribute="top" secondItem="KGk-i7-Jjw" secondAttribute="top" id="BO3-A4-UeK"/>
-                <constraint firstAttribute="trailing" secondItem="CvQ-NX-7bt" secondAttribute="trailing" id="RHR-zF-EEs"/>
+                <constraint firstItem="ofZ-6R-lZq" firstAttribute="top" secondItem="KGk-i7-Jjw" secondAttribute="top" constant="8" id="BO3-A4-UeK"/>
+                <constraint firstAttribute="trailing" secondItem="CvQ-NX-7bt" secondAttribute="trailing" constant="5" id="RHR-zF-EEs"/>
                 <constraint firstItem="ouR-V4-XBu" firstAttribute="top" secondItem="KGk-i7-Jjw" secondAttribute="top" id="RLy-oA-9i8"/>
                 <constraint firstAttribute="bottom" secondItem="ouR-V4-XBu" secondAttribute="bottom" id="aFf-we-gYT"/>
-                <constraint firstAttribute="trailing" secondItem="cFR-Iv-qwP" secondAttribute="trailing" id="qJj-jV-0nC"/>
+                <constraint firstAttribute="trailing" secondItem="cFR-Iv-qwP" secondAttribute="trailing" constant="5" id="qJj-jV-0nC"/>
                 <constraint firstAttribute="trailing" secondItem="a3e-oc-097" secondAttribute="trailing" id="vlz-1S-0qg"/>
             </constraints>
             <connections>

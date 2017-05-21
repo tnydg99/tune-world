@@ -1,5 +1,5 @@
 //
-//  WorldMapViewController.swift
+//  AddPlaylistViewController.swift
 //  TuneWorld
 //
 //  Created by Austin Tucker on 5/19/17.
@@ -7,17 +7,12 @@
 //
 
 import UIKit
-import MapKit
 
-class WorldMapViewController: UIViewController {
+class AddPlaylistViewController: UIViewController {
 
-    @IBOutlet weak var worldMapView: MKMapView!
-    @IBOutlet weak var spotifyPlayerView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        worldMapView.isZoomEnabled = false
-        worldMapView.isRotateEnabled = false
+
         // Do any additional setup after loading the view.
     }
 
