@@ -15,6 +15,11 @@ class ModelManager: NSObject {
     var playlistSongs : [Song] = []
     var playlists : [Playlist] = []
     var nowPlaying : [String] = []
+    let kCLientID = "492517f79b4445a693a31aed968fe484"
+    let kCallbackURL = "tuneworld://returnAfterLogin"
+    let kTokenSwapURL = "http://localhost:1234/swap"
+    let kTokenRefreshServiceURL = "http://localhost:1234/refresh"
+    
     var context : NSManagedObjectContext {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return self.context
@@ -27,7 +32,7 @@ class ModelManager: NSObject {
     func fetchPlaylists(playlistName: String) {
         do {
             let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Playlist")
-            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "rank", ascending: true)]
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
             if playlistName != "" {
                 fetchRequest.predicate = NSPredicate(format: "name == %@", playlistName)
             }
@@ -42,7 +47,7 @@ class ModelManager: NSObject {
     func fetchSongs(playlist: Playlist) {
         do {
             let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
-            let sortByNameDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            let sortByNameDescriptor = NSSortDescriptor(key: "rank", ascending: true)
             fetchRequest.predicate = NSPredicate(format: "playlist.name == %@", playlist.name!)
             fetchRequest.sortDescriptors = [sortByNameDescriptor]
             let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)

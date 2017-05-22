@@ -10,14 +10,20 @@ import UIKit
 
 class PlaylistTableViewController: UITableViewController {
 
+    @IBOutlet var playlistTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ModelManager.shared.fetchPlaylists(playlistName: "")
+        playlistTableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,24 +34,23 @@ class PlaylistTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return ModelManager.shared.playlists.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell", for: indexPath)
+        cell.textLabel?.text = ModelManager.shared.playlists[indexPath.row].name
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ModelManager.shared.fetchSongs(playlist: ModelManager.shared.playlists[indexPath.row])
+        performSegue(withIdentifier: "toAlbumsSegue", sender: indexPath)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -81,15 +86,4 @@ class PlaylistTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

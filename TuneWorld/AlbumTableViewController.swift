@@ -9,15 +9,24 @@
 import UIKit
 
 class AlbumTableViewController: UITableViewController {
-
+    
+    @IBOutlet var songTableView: UITableView!
+    var playlist : Playlist?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        songTableView.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,24 +37,28 @@ class AlbumTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return ModelManager.shared.playlistSongs.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "albumCell", for: indexPath)
+        //if let albumCell = cell as? AlbumTableViewCell {
+        let songLabel = cell.viewWithTag(1) as? UILabel
+        let artistLabel = cell.viewWithTag(2) as? UILabel
+        let imageView = cell.viewWithTag(3) as? UIImageView
+        songLabel?.text = ModelManager.shared.playlistSongs[indexPath.row].name
+        artistLabel?.text = ModelManager.shared.playlistSongs[indexPath.row].artist
+        imageView?.image = UIImage(data: ModelManager.shared.playlistSongs[indexPath.row].image! as Data)
         return cell
     }
-    */
+ 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 
     /*
     // Override to support conditional editing of the table view.

@@ -30,6 +30,7 @@
 		D98AC1331ECF43BE004DBC29 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */; };
 		D98AC1351ECF6B2A004DBC29 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1341ECF6B2A004DBC29 /* ModelManager.swift */; };
 		D98AC1371ED0FB42004DBC29 /* MusicAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */; };
+		D98AC1391ED1FB11004DBC29 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1381ED1FB11004DBC29 /* LoginViewController.swift */; };
 		FFAFE050EC190444829A4E20 /* Pods_TuneWorldUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44124069BD6513866BCBE7B /* Pods_TuneWorldUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewController.swift; sourceTree = "<group>"; };
 		D98AC1341ECF6B2A004DBC29 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicAdapter.swift; sourceTree = "<group>"; };
+		D98AC1381ED1FB11004DBC29 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FF79CD054E2513737541C268 /* Pods_TuneWorld.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TuneWorld.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 				D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */,
 				CED3B55B1ECA56C700D1FBD4 /* Assets.xcassets */,
 				CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */,
+				D98AC1381ED1FB11004DBC29 /* LoginViewController.swift */,
 				CED3B5601ECA56C700D1FBD4 /* Info.plist */,
 				D98AC12E1ECF328E004DBC29 /* PlaylistSearchViewController.swift */,
 				D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */,
@@ -509,6 +512,7 @@
 				D98AC1371ED0FB42004DBC29 /* MusicAdapter.swift in Sources */,
 				D98AC1281ECE970F004DBC29 /* AlbumTableViewCell.swift in Sources */,
 				D98AC1331ECF43BE004DBC29 /* PlaylistTableViewController.swift in Sources */,
+				D98AC1391ED1FB11004DBC29 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

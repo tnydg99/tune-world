@@ -13,7 +13,6 @@ import CoreData
 class MusicAdapter: NSObject {
 
     typealias JSONDictionary = [String:AnyObject]
-    //var searchURL = "https://api.spotify.com/v1/search?q=track%3AThe+Less+I+Know+the+Better+artist%3ATame+Impala&type=track"
     
     func getSpotifyMusic(url : String, playlist: Playlist) {
         Alamofire.request(url).responseJSON(completionHandler: {
@@ -21,7 +20,7 @@ class MusicAdapter: NSObject {
             if let data = response.data {
                 self.parseSpotifyData(data: data, playlist: playlist)
             }
-        }).resume()
+        })
     }
     
     func getLastFMData(url : String) {
@@ -30,7 +29,7 @@ class MusicAdapter: NSObject {
             if let data = response.data {
                 self.parseLastFMData(data: data)
             }
-        }).resume()
+        })
     }
     
     func parseSpotifyData(data: Data, playlist: Playlist) {
@@ -76,21 +75,23 @@ class MusicAdapter: NSObject {
         }
         let context = appDelegate.persistentContainer.viewContext
         do {
-            var country : String?
-            var playlist = Playlist()
+            var playlist : Playlist?
             var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
             if let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary {
                 if let attributes = tracks["@attr"] as? JSONDictionary {
-                    country = attributes["country"] as? String
-                    let date = Date()
-                    let playlistName = "\(String(describing: country)) - \(String(describing: date))"
-                    
-                    if let entity = NSEntityDescription.entity(forEntityName: "Playlist", in: context) {
-                        playlist = NSManagedObject(entity: entity, insertInto: context) as! Playlist
-                        playlist.setValue(playlistName, forKey: "name")
-                        playlist.setValue(country, forKey: "country")
+                    if let country = attributes["country"] as? String {
+                        let date = Date()
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "dd/MM/yyyy"
+                        let formattedDate = formatter.string(from: date)
+                        let playlistName = "\(String(describing: country)) - \(formattedDate)"
+                        
+                        if let entity = NSEntityDescription.entity(forEntityName: "Playlist", in: context) {
+                            playlist = NSManagedObject(entity: entity, insertInto: context) as? Playlist
+                            playlist?.setValue(playlistName, forKey: "name")
+                            playlist?.setValue(country, forKey: "country")
+                        }
                     }
-
                 }
                 if let trackArray = tracks["track"] as? [JSONDictionary] {
                     for track in trackArray {
@@ -118,8 +119,13 @@ class MusicAdapter: NSObject {
                             song.setValue(artistName, forKey: "artist")
                             song.setValue(rank, forKey: "rank")
                             song.setValue(image, forKey: "image")
-                            playlist.addToSongs(song)
+                            playlist?.addToSongs(song)
                         }
+                    }
+                    do {
+                        try context.save()
+                    } catch {
+                        print(error.localizedDescription)
                     }
                 }
             }
