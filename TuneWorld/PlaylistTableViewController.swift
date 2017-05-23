@@ -25,6 +25,10 @@ class PlaylistTableViewController: UITableViewController {
         ModelManager.shared.fetchPlaylists(playlistName: "")
         playlistTableView.reloadData()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="A6W-O5-9Bl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="abn-bg-S2k">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -218,7 +218,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4kZ-fW-bHI" id="PWt-qG-byE">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -290,7 +290,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MFZ-0G-1nF" id="fZJ-sV-QOU">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -325,7 +325,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nmc-Ag-C85" id="TGG-jq-Ziz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3W-wk-ItU">
@@ -504,7 +504,7 @@
             </objects>
             <point key="canvasLocation" x="2554" y="-566"/>
         </scene>
-        <!--Login View Controller-->
+        <!--TuneWorld-->
         <scene sceneID="Odr-QH-I4x">
             <objects>
                 <viewController id="abn-bg-S2k" customClass="LoginViewController" customModule="TuneWorld" customModuleProvider="target" sceneMemberID="viewController">
@@ -517,52 +517,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotify_Logo_RGB_Green" translatesAutoresizingMaskIntoConstraints="NO" id="feQ-1a-l0u">
-                                <rect key="frame" x="67" y="149" width="240" height="78"/>
+                                <rect key="frame" x="67" y="193" width="240" height="78"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="78" id="Rfb-vr-kYM"/>
                                     <constraint firstAttribute="width" constant="240" id="xdh-o5-3Qm"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login Using" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWw-YH-3VJ">
-                                <rect key="frame" x="67" y="120" width="240" height="21"/>
+                                <rect key="frame" x="67" y="164" width="240" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxX-DG-4SV">
-                                <rect key="frame" x="168" y="318" width="38" height="30"/>
+                                <rect key="frame" x="168" y="321" width="38" height="30"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="loginButtonPressed:" destination="abn-bg-S2k" eventType="touchUpInside" id="szu-zd-HmH"/>
+                                    <action selector="loginButtonPressed:" destination="abn-bg-S2k" eventType="touchUpInside" id="kWw-0k-NlS"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NWw-YH-3VJ" firstAttribute="top" secondItem="rCR-wD-DDh" secondAttribute="bottom" constant="100" id="Dxe-bV-ioT"/>
-                            <constraint firstItem="jxX-DG-4SV" firstAttribute="top" relation="lessThanOrEqual" secondItem="feQ-1a-l0u" secondAttribute="bottom" constant="100" id="Ftj-1P-IYA"/>
+                            <constraint firstItem="jxX-DG-4SV" firstAttribute="top" secondItem="feQ-1a-l0u" secondAttribute="bottom" constant="50" id="Ftj-1P-IYA"/>
                             <constraint firstItem="jxX-DG-4SV" firstAttribute="centerX" secondItem="op4-3Q-zyE" secondAttribute="centerX" id="Ocs-7B-XMz"/>
                             <constraint firstItem="feQ-1a-l0u" firstAttribute="top" secondItem="NWw-YH-3VJ" secondAttribute="bottom" constant="8" id="ibg-cc-9MN"/>
                             <constraint firstItem="feQ-1a-l0u" firstAttribute="centerX" secondItem="op4-3Q-zyE" secondAttribute="centerX" id="mz1-qx-Kli"/>
                             <constraint firstItem="feQ-1a-l0u" firstAttribute="leading" secondItem="NWw-YH-3VJ" secondAttribute="leading" id="tWB-uH-OKi"/>
-                            <constraint firstItem="jxX-DG-4SV" firstAttribute="centerY" secondItem="op4-3Q-zyE" secondAttribute="centerY" id="vIN-GD-WuS"/>
                             <constraint firstItem="feQ-1a-l0u" firstAttribute="trailing" secondItem="NWw-YH-3VJ" secondAttribute="trailing" id="zgG-Nw-3Vb"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="TuneWorld" id="wGz-Kc-Vof"/>
                     <connections>
                         <outlet property="loginButton" destination="jxX-DG-4SV" id="cOP-7H-HJo"/>
+                        <segue destination="A6W-O5-9Bl" kind="show" identifier="toTuneWorldSegue" id="yHa-me-4C7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akl-Yf-IUX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688.79999999999995" y="-1331.784107946027"/>
+            <point key="canvasLocation" x="1588" y="-1333"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="c8B-ik-sbH">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="A6W-O5-9Bl" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" automaticallyAdjustsScrollViewInsets="NO" id="A6W-O5-9Bl" customClass="TabBarViewController" customModule="TuneWorld" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="wEX-bA-fan">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -577,7 +578,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sa-bF-HDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1588" y="-1330"/>
+            <point key="canvasLocation" x="2553" y="-1333"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="utw-I1-kaB">

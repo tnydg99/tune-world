@@ -16,9 +16,9 @@ class ModelManager: NSObject {
     var playlists : [Playlist] = []
     var nowPlaying : [String] = []
     let kCLientID = "492517f79b4445a693a31aed968fe484"
-    let kCallbackURL = "tuneworld://returnAfterLogin"
-    let kTokenSwapURL = "http://localhost:1234/swap"
-    let kTokenRefreshServiceURL = "http://localhost:1234/refresh"
+    let kCallbackURL = "tuneworld://callback"
+    let kSessionUserDefaultsKey = "current_session"
+    let kNotificationName = Notification.Name("sessionUpdated")
     
     var context : NSManagedObjectContext {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

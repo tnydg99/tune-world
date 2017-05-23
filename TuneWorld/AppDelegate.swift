@@ -18,18 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
     var authViewController: UIViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-//        // Override point for customization after application launch.
-//         auth = SPTAuth.defaultInstance()
-//         player = SPTAudioStreamingController.sharedInstance()
-//         // The client ID you got from the developer site
-//         auth?.clientID = ModelManager.shared.kCLientID
-//         // The redirect URL as you entered it at the developer site
-//         auth?.redirectURL = URL(string: ModelManager.shared.kCallbackURL)
-//         // Setting the `sessionUserDefaultsKey` enables SPTAuth to automatically store the session object for future use.
-//         auth?.sessionUserDefaultsKey = "current_session"
-//         // Set the scopes you need the user to authorize. `SPTAuthStreamingScope` is required for playing audio.
-//         auth?.requestedScopes = [SPTAuthStreamingScope]
-//         
+        // Override point for customization after application launch.
+        auth = SPTAuth.defaultInstance()
+//        player = SPTAudioStreamingController.sharedInstance()
+        // The client ID you got from the developer site
+        auth?.clientID = ModelManager.shared.kCLientID
+        // The redirect URL as you entered it at the developer site
+        auth?.redirectURL = URL(string: ModelManager.shared.kCallbackURL)
+        // Setting the `sessionUserDefaultsKey` enables SPTAuth to automatically store the session object for future use.
+        auth?.sessionUserDefaultsKey = ModelManager.shared.kSessionUserDefaultsKey
+        // Set the scopes you need the user to authorize. `SPTAuthStreamingScope` is required for playing audio.
+        auth?.requestedScopes = [SPTAuthStreamingScope]
+        //Set the token refresh service url.
+        //auth?.tokenRefreshURL = URL(string: ModelManager.shared.kTokenRefreshServiceURL)
+        //Set the token swap service url.
+        //auth?.tokenSwapURL = URL(string: ModelManager.shared.kTokenSwapURL)
 //         // Become the streaming controller delegate
 //         player?.delegate = self;
 //         
@@ -48,6 +51,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
         return true
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        auth = SPTAuth.defaultInstance()
+        let authCallback : SPTAuthCallback = {
+            (error, session) in
+            if error != nil {
+                print(error!)
+            } else {
+                self.auth?.session = session
+            }
+            NotificationCenter.default.post(name: ModelManager.shared.kNotificationName, object: nil)
+        }
+        
+        if (auth?.canHandle(url))! {
+            auth?.handleAuthCallback(withTriggeredAuthURL: url, callback: authCallback)
+            return true
+        }
+        return false
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -101,22 +123,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
         return container
     }()
 
-    //MARK: - Spotify Helper Functions 
-    func startAuthenticationFlow() {
-    // Check if we could use the access token we already have
-        if let session = auth?.session {
-            if (session.isValid()) {
-                // Use it to log in
-                //[self startLoginFlow];
-            } else {
-                // Get the URL to the Spotify authorization portal
-                let authURL : URL = auth!.spotifyAppAuthenticationURL()
-                // Present in a SafariViewController
-                authViewController = SFSafariViewController(url: authURL)
-                window?.rootViewController = authViewController
-            }
-        }
-    }
+//    //MARK: - Spotify Helper Functions 
+//    func startAuthenticationFlow() {
+//    // Check if we could use the access token we already have
+//        if let session = auth?.session {
+//            if (session.isValid()) {
+//                // Use it to log in
+//                //[self startLoginFlow];
+//            } else {
+//                // Get the URL to the Spotify authorization portal
+//                let authURL : URL = auth!.spotifyAppAuthenticationURL()
+//                // Present in a SafariViewController
+//                authViewController = SFSafariViewController(url: authURL)
+//                window?.rootViewController = authViewController
+//            }
+//        }
+//    }
     
 //    func startLoginFlow(openURL: URL) -> Bool {
 //        if (auth?.canHandle(openURL))! {

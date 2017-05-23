@@ -14,7 +14,6 @@ class WorldMapViewController: UIViewController {
 
     @IBOutlet weak var worldMapView: MKMapView!
     @IBOutlet weak var spotifyPlayerView: UIView!
-    var locationManager : CLLocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +26,8 @@ class WorldMapViewController: UIViewController {
     }
     
     @IBAction func mapTapGestureMade(_ sender: UITapGestureRecognizer) {
-        let point = sender.location(in: worldMapView)
-        let coordinates = worldMapView.convert(point, toCoordinateFrom: worldMapView)
+        let point = sender.location(in: self.worldMapView)
+        let coordinates = self.worldMapView.convert(point, toCoordinateFrom: self.worldMapView)
         let location = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location, completionHandler: {
@@ -45,17 +44,5 @@ class WorldMapViewController: UIViewController {
                 }
             }
         })
-
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
