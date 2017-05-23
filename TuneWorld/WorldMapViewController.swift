@@ -37,8 +37,20 @@ class WorldMapViewController: UIViewController {
                     if let country = placemark.country {
                         let formattedCountry = country.replacingOccurrences(of: " ", with: "%20").lowercased()
                         let url = "http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=\(formattedCountry)&api_key=317d5d825c8e7268a6ec6730d9cc071e&format=json"
+                        let playlistName = ModelManager.shared.formatPlaylistName(country: country)
                         DispatchQueue.global().async {
-                            ModelManager.shared.musicAdapter.getLastFMData(url: url)
+                            ModelManager.shared.musicAdapter.getLastFMData(url: url, playlistName: playlistName)
+                            ModelManager.shared.fetchPlaylists(playlistName: playlistName)
+                            for playlist in ModelManager.shared.playlists {
+                                ModelManager.shared.fetchSongs(playlist: playlist)
+                                for song in ModelManager.shared.playlistSongs {
+                                    if let name = song.name?.replacingOccurrences(of: " ", with: "+"),
+                                        let artist = song.artist?.replacingOccurrences(of: " ", with: "+") {
+                                        let url = "https://api.spotify.com/v1/search?query=track%3A\(String(describing: name))+artist%3A\(String(describing: artist))&type=track&offset=0&limit=1"
+                                        ModelManager.shared.musicAdapter.getSpotifyMusic(url: url, playlist: playlist)
+                                    }
+                                }
+                            }
                         }
                     }
                 }

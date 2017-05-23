@@ -20,34 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         auth = SPTAuth.defaultInstance()
-//        player = SPTAudioStreamingController.sharedInstance()
         // The client ID you got from the developer site
         auth?.clientID = ModelManager.shared.kCLientID
         // The redirect URL as you entered it at the developer site
         auth?.redirectURL = URL(string: ModelManager.shared.kCallbackURL)
-        // Setting the `sessionUserDefaultsKey` enables SPTAuth to automatically store the session object for future use.
-        auth?.sessionUserDefaultsKey = ModelManager.shared.kSessionUserDefaultsKey
         // Set the scopes you need the user to authorize. `SPTAuthStreamingScope` is required for playing audio.
         auth?.requestedScopes = [SPTAuthStreamingScope]
-        //Set the token refresh service url.
-        //auth?.tokenRefreshURL = URL(string: ModelManager.shared.kTokenRefreshServiceURL)
-        //Set the token swap service url.
-        //auth?.tokenSwapURL = URL(string: ModelManager.shared.kTokenSwapURL)
-//         // Become the streaming controller delegate
-//         player?.delegate = self;
-//         
-//         // Start up the streaming controller.
-//        do {
-//            try player?.start(withClientId: auth?.clientID)
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//        
-//        
-//         // Start authenticating when the app is finished launching
-//        DispatchQueue.main.async {
-//            self.startAuthenticationFlow()
-//        }
         return true
     }
 
@@ -60,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
             } else {
                 self.auth?.session = session
             }
-            NotificationCenter.default.post(name: ModelManager.shared.kNotificationName, object: nil)
+            NotificationCenter.default.post(name: ModelManager.shared.kSessionNotificationName, object: nil)
         }
         
         if (auth?.canHandle(url))! {

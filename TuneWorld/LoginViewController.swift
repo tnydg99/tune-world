@@ -16,7 +16,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(sessionUpdated(_:)), name: ModelManager.shared.kNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sessionUpdated(_:)), name: ModelManager.shared.kSessionNotificationName, object: nil)
         firstLoad = true
     }
 
@@ -69,7 +69,6 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         firstLoad = false
         let tuneWorldVC = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
         present(tuneWorldVC, animated: true, completion: nil)
-        //performSegue(withIdentifier: "toTuneWorldSegue", sender: nil)
     }
     
     func openLoginPage() {

@@ -15,6 +15,10 @@ class TabBarViewController: UITabBarController {
         self.navigationItem.title = "TuneWorld"
         self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
+        ModelManager.shared.handleNewSession()
+        ModelManager.shared.player?.setIsPlaying(false, callback: nil)
+        ModelManager.shared.playMusic()
+         NotificationCenter.default.addObserver(self, selector: #selector(musicAdded(_:)), name: ModelManager.shared.kMusicAddedNotificationName, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +26,9 @@ class TabBarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
+    func musicAdded(_ notification: Notification) {
+        ModelManager.shared.playMusic()
+    }
 
     /*
     // MARK: - Navigation

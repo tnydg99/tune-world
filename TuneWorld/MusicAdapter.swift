@@ -23,20 +23,24 @@ class MusicAdapter: NSObject {
         })
     }
     
-    func getLastFMData(url : String) {
-        Alamofire.request(url).responseJSON(completionHandler: {
-            response in
-            if let data = response.data {
-                self.parseLastFMData(data: data)
+    func getLastFMData(url : String, playlistName: String) {
+        let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Playlist")
+        fetchRequest.predicate = NSPredicate(format: "name == %@", playlistName)
+        do {
+            let count = try ModelManager.shared.context.count(for: fetchRequest)
+            if count == 0 {
+                Alamofire.request(url).responseJSON(completionHandler: {
+                    response in
+                    if let data = response.data {
+                        self.parseLastFMData(data: data, playlistName: playlistName)
+                    }
+                })
             }
-        })
-    }
-    
-    func parseSpotifyData(data: Data, playlist: Playlist) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
+        } catch {
+            print(error.localizedDescription)
         }
-        let context = appDelegate.persistentContainer.viewContext
+    }
+    func parseSpotifyData(data: Data, playlist: Playlist) {
         do {
             var songName : String?
             var artistName : String?
@@ -54,9 +58,13 @@ class MusicAdapter: NSObject {
                         uri = item["uri"] as? String
                         let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
                         fetchRequest.predicate = NSPredicate(format: "playlist.name == %@ && name == %@ && artist == %@", playlist.name!, songName!, artistName!)
-                        let count = try context.count(for: fetchRequest)
-                        if count != 0 {
+                        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: ModelManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
+                        try fetchResultsController.performFetch()
+                        let count = try ModelManager.shared.context.count(for: fetchRequest)
+                        if count == 1 {
                             ModelManager.shared.nowPlaying.append(uri!)
+                            ModelManager.shared.nowPlayingSongs.append(fetchResultsController.fetchedObjects![0] as! Song)
+                            NotificationCenter.default.post(name: ModelManager.shared.kMusicAddedNotificationName, object: nil)
                         }
                     }
                     
@@ -69,25 +77,15 @@ class MusicAdapter: NSObject {
         }
     }
     
-    func parseLastFMData(data: Data) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let context = appDelegate.persistentContainer.viewContext
+    func parseLastFMData(data: Data, playlistName: String) {
         do {
             var playlist : Playlist?
             var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
             if let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary {
                 if let attributes = tracks["@attr"] as? JSONDictionary {
                     if let country = attributes["country"] as? String {
-                        let date = Date()
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "dd/MM/yyyy"
-                        let formattedDate = formatter.string(from: date)
-                        let playlistName = "\(String(describing: country)) - \(formattedDate)"
-                        
-                        if let entity = NSEntityDescription.entity(forEntityName: "Playlist", in: context) {
-                            playlist = NSManagedObject(entity: entity, insertInto: context) as? Playlist
+                        if let entity = NSEntityDescription.entity(forEntityName: "Playlist", in: ModelManager.shared.context) {
+                            playlist = NSManagedObject(entity: entity, insertInto: ModelManager.shared.context) as? Playlist
                             playlist?.setValue(playlistName, forKey: "name")
                             playlist?.setValue(country, forKey: "country")
                         }
@@ -113,8 +111,8 @@ class MusicAdapter: NSObject {
                         if let attributes = track["@attr"] as? JSONDictionary {
                             rank = attributes["rank"] as? Int32
                         }
-                        if let entity = NSEntityDescription.entity(forEntityName: "Song", in: context) {
-                            let song = NSManagedObject(entity: entity, insertInto: context) as! Song
+                        if let entity = NSEntityDescription.entity(forEntityName: "Song", in: ModelManager.shared.context) {
+                            let song = NSManagedObject(entity: entity, insertInto: ModelManager.shared.context) as! Song
                             song.setValue(name, forKey: "name")
                             song.setValue(artistName, forKey: "artist")
                             song.setValue(rank, forKey: "rank")
@@ -123,7 +121,7 @@ class MusicAdapter: NSObject {
                         }
                     }
                     do {
-                        try context.save()
+                        try ModelManager.shared.context.save()
                     } catch {
                         print(error.localizedDescription)
                     }

@@ -56,6 +56,14 @@ class PlaylistTableViewController: UITableViewController {
         performSegue(withIdentifier: "toAlbumsSegue", sender: indexPath)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAlbumsSegue" {
+            let destination = segue.destination as? AlbumTableViewController
+            let index = sender as! IndexPath
+            destination?.playlist = ModelManager.shared.playlists[index.row]
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
