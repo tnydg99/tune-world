@@ -22,6 +22,7 @@
 		CED3B56A1ECA56C700D1FBD4 /* TuneWorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5691ECA56C700D1FBD4 /* TuneWorldTests.swift */; };
 		CED3B5751ECA56C700D1FBD4 /* TuneWorldUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED3B5741ECA56C700D1FBD4 /* TuneWorldUITests.swift */; };
 		D93285E01ED3DA7F00563A29 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93285DF1ED3DA7F00563A29 /* TabBarViewController.swift */; };
+		D93285E21ED4AFD600563A29 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93285E11ED4AFD600563A29 /* SongViewController.swift */; };
 		D98AC12B1ECEA7B4004DBC29 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */; };
 		D98AC12D1ECEA7CE004DBC29 /* WorldMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */; };
 		D98AC12F1ECF328E004DBC29 /* PlaylistSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12E1ECF328E004DBC29 /* PlaylistSearchViewController.swift */; };
@@ -79,6 +80,7 @@
 		CED3B5761ECA56C700D1FBD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7ABD93CF9F57A6ADC0D0914 /* Pods-TuneWorld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TuneWorld.release.xcconfig"; path = "Pods/Target Support Files/Pods-TuneWorld/Pods-TuneWorld.release.xcconfig"; sourceTree = "<group>"; };
 		D93285DF1ED3DA7F00563A29 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		D93285E11ED4AFD600563A29 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
 		D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldMapViewController.swift; sourceTree = "<group>"; };
 		D98AC12E1ECF328E004DBC29 /* PlaylistSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistSearchViewController.swift; sourceTree = "<group>"; };
@@ -175,10 +177,11 @@
 				CED3B5601ECA56C700D1FBD4 /* Info.plist */,
 				D98AC12E1ECF328E004DBC29 /* PlaylistSearchViewController.swift */,
 				D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */,
+				D93285E11ED4AFD600563A29 /* SongViewController.swift */,
+				D93285DF1ED3DA7F00563A29 /* TabBarViewController.swift */,
 				CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */,
 				CED3B5581ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld */,
 				D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */,
-				D93285DF1ED3DA7F00563A29 /* TabBarViewController.swift */,
 			);
 			path = TuneWorld;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				D98AC1351ECF6B2A004DBC29 /* ModelManager.swift in Sources */,
 				CED3B5521ECA56C700D1FBD4 /* AppDelegate.swift in Sources */,
 				D98AC1371ED0FB42004DBC29 /* MusicAdapter.swift in Sources */,
+				D93285E21ED4AFD600563A29 /* SongViewController.swift in Sources */,
 				D98AC1331ECF43BE004DBC29 /* PlaylistTableViewController.swift in Sources */,
 				D98AC1391ED1FB11004DBC29 /* LoginViewController.swift in Sources */,
 			);

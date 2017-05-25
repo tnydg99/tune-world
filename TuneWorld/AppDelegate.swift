@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import FBSDKShareKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
     var auth : SPTAuth?
     var player: SPTAudioStreamingController?
     var authViewController: UIViewController?
+    var tabBarController : TabBarViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,7 +31,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
         return true
     }
 
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        if handled {
+            return handled
+        }
+        let parsedURL = BFURL(inboundURL: url, sourceApplication: sourceApplication)
+        if parsedURL?.appLinkData != nil {
+            _ = parsedURL?.targetURL
+        }
+        return true
+        
+    }
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+         //[[FBSDKApplicationDelegate sharedInstance] application:application
+//            openURL:url
+//            sourceApplication:sourceApplication
+//            annotation:annotation
+        //];
+        
+        
         auth = SPTAuth.defaultInstance()
         let authCallback : SPTAuthCallback = {
             (error, session) in
@@ -100,38 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
         })
         return container
     }()
-
-//    //MARK: - Spotify Helper Functions 
-//    func startAuthenticationFlow() {
-//    // Check if we could use the access token we already have
-//        if let session = auth?.session {
-//            if (session.isValid()) {
-//                // Use it to log in
-//                //[self startLoginFlow];
-//            } else {
-//                // Get the URL to the Spotify authorization portal
-//                let authURL : URL = auth!.spotifyAppAuthenticationURL()
-//                // Present in a SafariViewController
-//                authViewController = SFSafariViewController(url: authURL)
-//                window?.rootViewController = authViewController
-//            }
-//        }
-//    }
     
-//    func startLoginFlow(openURL: URL) -> Bool {
-//        if (auth?.canHandle(openURL))! {
-//            authViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-//            authViewController = nil
-//            auth?.handleAuthCallback(withTriggeredAuthURL: openURL, callback: {
-//                (error, session) in
-//                if (session != nil) {
-//                    self.player?.login(withAccessToken: self.auth?.session.accessToken)
-//                }
-//            })
-//            return true
-//        }
-//        return false
-//    }
+    
     
     // MARK: - Core Data Saving support
 

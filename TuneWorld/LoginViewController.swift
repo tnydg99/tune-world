@@ -16,6 +16,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     @IBOutlet weak var loginButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Login"
         NotificationCenter.default.addObserver(self, selector: #selector(sessionUpdated(_:)), name: ModelManager.shared.kSessionNotificationName, object: nil)
         firstLoad = true
     }
@@ -67,8 +68,15 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
 
     func showPlayer() {
         firstLoad = false
-        let tuneWorldVC = storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-        present(tuneWorldVC, animated: true, completion: nil)
+        ModelManager.shared.handleNewSession()
+        ModelManager.shared.fetchPlaylists(playlistName: "")
+        if ModelManager.shared.playlists.count == 0 {
+            tabBarController?.tabBar.items?[1].isEnabled = true
+            tabBarController?.selectedViewController = tabBarController?.viewControllers?[1]
+        } else {
+            tabBarController?.tabBar.items?[2].isEnabled = true
+            tabBarController?.selectedViewController = tabBarController?.viewControllers?[2]
+        }
     }
     
     func openLoginPage() {

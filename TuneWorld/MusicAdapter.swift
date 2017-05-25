@@ -15,12 +15,19 @@ class MusicAdapter: NSObject {
     typealias JSONDictionary = [String:AnyObject]
     
     func getSpotifyMusic(url : String, playlist: Playlist) {
-        Alamofire.request(url).responseJSON(completionHandler: {
-            response in
-            if let data = response.data {
-                self.parseSpotifyData(data: data, playlist: playlist)
-            }
-        })
+        DispatchQueue.global().async {
+            let formattedURL = String(utf8String: url.cString(using: String.Encoding.utf8)!)
+            Alamofire.request(formattedURL!).responseJSON(completionHandler: {
+                response in
+                switch response.result {
+                case .success( _):
+                    guard let data = response.data else { return }
+                    self.parseSpotifyData(url: url, data: data, playlist: playlist)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
     }
     
     func getLastFMData(url : String, playlistName: String) {
@@ -31,49 +38,48 @@ class MusicAdapter: NSObject {
             if count == 0 {
                 Alamofire.request(url).responseJSON(completionHandler: {
                     response in
-                    if let data = response.data {
-                        self.parseLastFMData(data: data, playlistName: playlistName)
-                    }
+                    guard let data = response.data else { return }
+                    self.parseLastFMData(data: data, playlistName: playlistName)
                 })
             }
         } catch {
             print(error.localizedDescription)
         }
     }
-    func parseSpotifyData(data: Data, playlist: Playlist) {
-        do {
-            var songName : String?
-            var artistName : String?
-            var uri : String?
-            var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
-            if let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary {
-                if let items = tracks["items"] as? [JSONDictionary] {
-                    for item in items {
-                        if let artists = item["artists"] as? [JSONDictionary] {
-                            for artist in artists {
-                                artistName = artist["name"] as? String
-                            }
-                        }
-                        songName = item["name"] as? String
-                        uri = item["uri"] as? String
-                        let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
-                        fetchRequest.predicate = NSPredicate(format: "playlist.name == %@ && name == %@ && artist == %@", playlist.name!, songName!, artistName!)
-                        let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: ModelManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
+    func parseSpotifyData(url : String, data: Data, playlist: Playlist) {
+        DispatchQueue.global().async {
+            do {
+                var artistName : String?
+                var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
+                guard let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary else { return }
+                guard let items = tracks["items"] as? [JSONDictionary] else { return }
+                for item in items {
+                    guard let artists = item["artists"] as? [JSONDictionary] else { return }
+                    for artist in artists {
+                        artistName = artist["name"] as? String
+                    }
+                    let songName = item["name"] as? String
+                    let uri = item["uri"] as? String
+                    let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
+                    fetchRequest.predicate = NSPredicate(format: "playlist.name == %@ && name == %@ && artist == %@", playlist.name!, songName!, artistName!)
+                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+                    let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: ModelManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
+                    do {
                         try fetchResultsController.performFetch()
                         let count = try ModelManager.shared.context.count(for: fetchRequest)
                         if count == 1 {
                             ModelManager.shared.nowPlaying.append(uri!)
                             ModelManager.shared.nowPlayingSongs.append(fetchResultsController.fetchedObjects![0] as! Song)
-                            NotificationCenter.default.post(name: ModelManager.shared.kMusicAddedNotificationName, object: nil)
                         }
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                    
                 }
+                NotificationCenter.default.post(name: ModelManager.shared.kMusicAddedNotificationName, object: nil)
+            } catch {
+                print(url + " " + error.localizedDescription)
+                print(data)
             }
-            
-            
-        } catch {
-            print(error.localizedDescription)
         }
     }
     
@@ -81,51 +87,34 @@ class MusicAdapter: NSObject {
         do {
             var playlist : Playlist?
             var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
-            if let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary {
-                if let attributes = tracks["@attr"] as? JSONDictionary {
-                    if let country = attributes["country"] as? String {
-                        if let entity = NSEntityDescription.entity(forEntityName: "Playlist", in: ModelManager.shared.context) {
-                            playlist = NSManagedObject(entity: entity, insertInto: ModelManager.shared.context) as? Playlist
-                            playlist?.setValue(playlistName, forKey: "name")
-                            playlist?.setValue(country, forKey: "country")
-                        }
-                    }
-                }
-                if let trackArray = tracks["track"] as? [JSONDictionary] {
-                    for track in trackArray {
-                        var artistName : String?
-                        var rank : Int32?
-                        var image : NSData?
-                        let name = track["name"] as? String
-                        if let artist = track["artist"] as? JSONDictionary {
-                            artistName = artist["name"] as? String
-                        }
-                        if let artist = track["artist"] as? JSONDictionary {
-                            artistName = artist["name"] as? String
-                        }
-                        if let albumArts = track["image"] as? [JSONDictionary] {
-                            let images = albumArts[2]
-                            let albumArtURL = URL(string: images["#text"] as! String)
-                            image = NSData(contentsOf: albumArtURL!)
-                        }
-                        if let attributes = track["@attr"] as? JSONDictionary {
-                            rank = attributes["rank"] as? Int32
-                        }
-                        if let entity = NSEntityDescription.entity(forEntityName: "Song", in: ModelManager.shared.context) {
-                            let song = NSManagedObject(entity: entity, insertInto: ModelManager.shared.context) as! Song
-                            song.setValue(name, forKey: "name")
-                            song.setValue(artistName, forKey: "artist")
-                            song.setValue(rank, forKey: "rank")
-                            song.setValue(image, forKey: "image")
-                            playlist?.addToSongs(song)
-                        }
-                    }
-                    do {
-                        try ModelManager.shared.context.save()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
+            guard let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary, let attributes = tracks["@attr"] as? JSONDictionary, let country = attributes["country"] as? String else { return }
+            guard let entity = NSEntityDescription.entity(forEntityName: "Playlist", in: ModelManager.shared.context) else { return }
+            playlist = NSManagedObject(entity: entity, insertInto: ModelManager.shared.context) as? Playlist
+            guard let trackArray = tracks["track"] as? [JSONDictionary] else { return }
+            if trackArray.count != 0 {
+                playlist?.setValue(playlistName, forKey: "name")
+                playlist?.setValue(country, forKey: "country")
+            }
+            for track in trackArray {
+                guard let artist = track["artist"] as? JSONDictionary, let albumArts = track["image"] as? [JSONDictionary], let attributes = track["@attr"] as? JSONDictionary else { return }
+                let name = track["name"] as? String
+                let artistName = artist["name"] as? String
+                let images = albumArts[2]
+                let albumArtURL = URL(string: images["#text"] as! String)
+                let image = NSData(contentsOf: albumArtURL!)
+                let rank = attributes["rank"] as? Int32
+                guard let entity = NSEntityDescription.entity(forEntityName: "Song", in: ModelManager.shared.context) else { return }
+                let song = NSManagedObject(entity: entity, insertInto: ModelManager.shared.context) as! Song
+                song.setValue(name, forKey: "name")
+                song.setValue(artistName, forKey: "artist")
+                song.setValue(rank, forKey: "rank")
+                song.setValue(image, forKey: "image")
+                playlist?.addToSongs(song)
+            }
+            do {
+                try ModelManager.shared.context.save()
+            } catch {
+                print(error.localizedDescription)
             }
         } catch {
             print(error.localizedDescription)

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import AVFoundation
+import FBSDKShareKit
 
 class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     static var shared = ModelManager()
@@ -22,6 +23,8 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     let kSessionNotificationName = Notification.Name("sessionUpdated")
     let kMusicAddedNotificationName = Notification.Name("musicAdded")
     var player = SPTAudioStreamingController.sharedInstance()
+    var nowPlayingIndex : Int = 0
+    var content = FBSDKAppInviteContent()
     var context : NSManagedObjectContext {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return self.context
@@ -29,7 +32,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         return appDelegate.persistentContainer.viewContext
     }
 
-    private override init () { }
+    private override init () { content.appLinkURL = URL(string: "https://fb.me/1698718100423489") }
     
     func fetchPlaylists(playlistName: String) {
         do {
@@ -81,6 +84,17 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func addSongsToNowPlaying(_ playlist: Playlist) {
+        for song in self.playlistSongs {
+            guard let name = song.name?.replacingOccurrences(of: " ", with: "+"), let artist = song.artist?.replacingOccurrences(of: " ", with: "+") else { return }
+            let url = "https://api.spotify.com/v1/search?query=track%3A\(String(describing: name))+artist%3A\(String(describing: artist))&type=track&offset=0&limit=1"
+        DispatchQueue.global().async {
+                self.musicAdapter.getSpotifyMusic(url: url, playlist: playlist)
+            }
+        }
+    }
 //
 //        if (player == nil) {
 //            player = SPTAudioStreamingController.sharedInstance()
@@ -100,16 +114,15 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
 //            alert.present(alert, animated: true, completion: nil)
 //            closeSession()
 //        }
-    }
     
     func closeSession() {
         let auth = SPTAuth.defaultInstance()
         auth?.session = nil
     }
     
-    func playMusic() {
+    func playMusic(_ index: Int) {
         if nowPlaying.count > 0 { //&& !(player?.playbackState.isPlaying)! {
-                player?.playSpotifyURI(nowPlaying[0], startingWith: 0, startingWithPosition: 0, callback: {
+                player?.playSpotifyURI(nowPlaying[index], startingWith: 0, startingWithPosition: 0, callback: {
                     error in
                     if let error = error {
                         print(error.localizedDescription)
@@ -120,9 +133,12 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     
     //MARK
     
+    func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
+    }
+    
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
-        nowPlaying.remove(at: 0)
-        playMusic()
+        nowPlayingIndex += 1
+        playMusic(nowPlayingIndex)
     }
     
     func audioStreamingDidLogout(_ audioStreaming: SPTAudioStreamingController!) {

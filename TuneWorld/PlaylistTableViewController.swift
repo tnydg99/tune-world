@@ -10,14 +10,17 @@ import UIKit
 
 class PlaylistTableViewController: UITableViewController {
 
+    var firstLoad : Bool = false
     @IBOutlet var playlistTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.title = "Playlists"
+        firstLoad = true
+        let alert = UIAlertController(title: "Select a playlist", message: "Please select a playlist to start playing.", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        present(alert, animated: true, completion: nil)
+        self.definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +56,30 @@ class PlaylistTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ModelManager.shared.fetchSongs(playlist: ModelManager.shared.playlists[indexPath.row])
-        performSegue(withIdentifier: "toAlbumsSegue", sender: indexPath)
+        if firstLoad {
+            guard let tabBarItemCount = tabBarController?.tabBar.items?.count else { return }
+            for tabBarItemIndex in 0..<tabBarItemCount {
+                tabBarController?.tabBar.items?[tabBarItemIndex].isEnabled = true
+            }
+            firstLoad = false
+            DispatchQueue.global().async {
+                ModelManager.shared.addSongsToNowPlaying(ModelManager.shared.playlists[indexPath.row])
+            }
+        } else {
+            let alert = UIAlertController(title: "Add Playlist", message: "Would you like to add this playlist to Now Playing?", preferredStyle: .actionSheet)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {
+                alert in
+                ModelManager.shared.addSongsToNowPlaying(ModelManager.shared.playlists[indexPath.row])
+                self.performSegue(withIdentifier: "toAlbumsSegue", sender: indexPath)
+            })
+            let noAction = UIAlertAction(title: "No", style: .default, handler: {
+                alert in
+                self.performSegue(withIdentifier: "toAlbumsSegue", sender: indexPath)
+            })
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            present(alert, animated: true, completion: nil)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
