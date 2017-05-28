@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import FBSDKShareKit
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate {
@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
     var auth : SPTAuth?
     var player: SPTAudioStreamingController?
     var authViewController: UIViewController?
-    var tabBarController : TabBarViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Twitter.sharedInstance().start(withConsumerKey:"5ofREuOLTR7ndg8WexSKPgGhr", consumerSecret:"8IEUSazR8nFxBjPl7eRpB6qrmO3euJfnqmfmMkRyvlCbCQxrBF")
         // Override point for customization after application launch.
         auth = SPTAuth.defaultInstance()
         // The client ID you got from the developer site
@@ -30,28 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
         auth?.requestedScopes = [SPTAuthStreamingScope]
         return true
     }
-
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        if handled {
-            return handled
-        }
-        let parsedURL = BFURL(inboundURL: url, sourceApplication: sourceApplication)
-        if parsedURL?.appLinkData != nil {
-            _ = parsedURL?.targetURL
-        }
-        return true
-        
-    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-         //[[FBSDKApplicationDelegate sharedInstance] application:application
-//            openURL:url
-//            sourceApplication:sourceApplication
-//            annotation:annotation
-        //];
-        
-        
+        if Twitter.sharedInstance().application(app, open:url, options: options) {
+            return true
+        }
         auth = SPTAuth.defaultInstance()
         let authCallback : SPTAuthCallback = {
             (error, session) in

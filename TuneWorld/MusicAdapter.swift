@@ -15,19 +15,16 @@ class MusicAdapter: NSObject {
     typealias JSONDictionary = [String:AnyObject]
     
     func getSpotifyMusic(url : String, playlist: Playlist) {
-        DispatchQueue.global().async {
-            let formattedURL = String(utf8String: url.cString(using: String.Encoding.utf8)!)
-            Alamofire.request(formattedURL!).responseJSON(completionHandler: {
-                response in
-                switch response.result {
-                case .success( _):
-                    guard let data = response.data else { return }
-                    self.parseSpotifyData(url: url, data: data, playlist: playlist)
-                case .failure(let error):
-                    print(error)
-                }
-            })
-        }
+        Alamofire.request(url).responseJSON(completionHandler: {
+            response in
+            switch response.result {
+            case .success( _):
+                guard let data = response.data else { return }
+                self.parseSpotifyData(url: url, data: data, playlist: playlist)
+            case .failure(let error):
+                print(error)
+            }
+        })
     }
     
     func getLastFMData(url : String, playlistName: String) {
@@ -46,40 +43,45 @@ class MusicAdapter: NSObject {
             print(error.localizedDescription)
         }
     }
+    
     func parseSpotifyData(url : String, data: Data, playlist: Playlist) {
-        DispatchQueue.global().async {
-            do {
-                var artistName : String?
-                var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
-                guard let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary else { return }
-                guard let items = tracks["items"] as? [JSONDictionary] else { return }
-                for item in items {
-                    guard let artists = item["artists"] as? [JSONDictionary] else { return }
-                    for artist in artists {
-                        artistName = artist["name"] as? String
-                    }
-                    let songName = item["name"] as? String
-                    let uri = item["uri"] as? String
-                    let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
-                    fetchRequest.predicate = NSPredicate(format: "playlist.name == %@ && name == %@ && artist == %@", playlist.name!, songName!, artistName!)
-                    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-                    let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: ModelManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
-                    do {
-                        try fetchResultsController.performFetch()
-                        let count = try ModelManager.shared.context.count(for: fetchRequest)
-                        if count == 1 {
-                            ModelManager.shared.nowPlaying.append(uri!)
-                            ModelManager.shared.nowPlayingSongs.append(fetchResultsController.fetchedObjects![0] as! Song)
+        do {
+            var artistName : String?
+            var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
+            guard let tracks = rootJSONDictionary?["tracks"] as? JSONDictionary else { return }
+            guard let items = tracks["items"] as? [JSONDictionary] else { return }
+            for item in items {
+                guard let artists = item["artists"] as? [JSONDictionary] else { return }
+                for artist in artists {
+                    artistName = artist["name"] as? String
+                }
+                let songName = item["name"] as? String
+                let uri = item["uri"] as? String
+                let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
+                fetchRequest.predicate = NSPredicate(format: "playlist.name == %@ && name == %@ && artist == %@", playlist.name!, songName!, artistName!)
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+                let fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: ModelManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
+                do {
+                    try fetchResultsController.performFetch()
+                    let count = try ModelManager.shared.context.count(for: fetchRequest)
+                    if count == 1 {
+                        let song = fetchResultsController.fetchedObjects?[0] as! Song
+                        song.setValue(uri, forKey: "uri")
+                        ModelManager.shared.nowPlayingSongs.append(song)
+                        do {
+                            try ModelManager.shared.context.save()
+                        } catch {
+                            print(error.localizedDescription)
                         }
-                    } catch {
-                        print(error.localizedDescription)
                     }
+                } catch {
+                    print("here " + error.localizedDescription)
                 }
                 NotificationCenter.default.post(name: ModelManager.shared.kMusicAddedNotificationName, object: nil)
-            } catch {
-                print(url + " " + error.localizedDescription)
-                print(data)
             }
+        } catch {
+            print(url + " " + error.localizedDescription)
+            print(data)
         }
     }
     

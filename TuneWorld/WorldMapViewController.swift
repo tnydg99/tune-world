@@ -10,35 +10,51 @@ import UIKit
 import MapKit
 import CoreLocation
 import MarqueeLabel
-import FBSDKShareKit
+import TwitterKit
+import Social
 
-class WorldMapViewController: UIViewController, FBSDKAppInviteDialogDelegate {
+class WorldMapViewController: UIViewController {
 
     @IBOutlet weak var worldMapView: MKMapView!
     @IBOutlet weak var spotifyPlayerView: UIView!
     @IBOutlet weak var songLabel: MarqueeLabel!
     @IBOutlet weak var artistImageView: UIImageView!
     @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var rewindButton: UIButton!
-    @IBOutlet weak var fastForwardButton: UIButton!
-    @IBOutlet weak var facebookButton: UIButton!
-    let dialog = FBSDKAppInviteDialog()
-    var playlistName : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "TuneWorld"
         worldMapView.isRotateEnabled = false
-        if ModelManager.shared.nowPlayingSongs.count != 0 {
-            artistImageView.image = UIImage(data: ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].image! as Data)
-            songLabel.text = ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].name! + " - " + ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].artist! + " "
-            songLabel.restartLabel()
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(musicChanged(_:)), name: ModelManager.shared.kMusicChangedNotificationName, object: nil)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if ModelManager.shared.nowPlayingSongs.count > 0 {
+            setSongDetails()
+            playPauseButton.imageView?.image = ModelManager.shared.isPlaying ? #imageLiteral(resourceName: "Pause-48") : #imageLiteral(resourceName: "Play-48")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func musicChanged(_ notification: Notification) {
+        setSongDetails()
+    }
+    
+    func setSongDetails(){
+        artistImageView.image = UIImage(data: ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].image! as Data)
+        songLabel.text = ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].name! + " - " + ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].artist! + " "
+        songLabel.restartLabel()
+    }
+    
+    func presentSocialMedia(_ service: String) {
+        let composer = SLComposeViewController(forServiceType: service)
+        composer?.setInitialText("I am listening to \(ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].name!) by \(ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].artist!) using the TuneWorld app!")
+        self.present(composer!, animated: true, completion: nil)
     }
     
     @IBAction func rewindButtonPressed(_ sender: UIButton) {
@@ -46,9 +62,7 @@ class WorldMapViewController: UIViewController, FBSDKAppInviteDialogDelegate {
         if ModelManager.shared.nowPlayingIndex > 0 {
            ModelManager.shared.nowPlayingIndex -= 1
         }
-        artistImageView.image = UIImage(data: ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].image! as Data)
-        songLabel.text = ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].name! + " - " + ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].artist! + " "
-        songLabel.restartLabel()
+        setSongDetails()
         playPauseButton.setImage(#imageLiteral(resourceName: "Pause-48"), for: .normal)
         ModelManager.shared.playMusic(ModelManager.shared.nowPlayingIndex)
     }
@@ -57,35 +71,47 @@ class WorldMapViewController: UIViewController, FBSDKAppInviteDialogDelegate {
         ModelManager.shared.player?.setIsPlaying(!(ModelManager.shared.player?.playbackState.isPlaying)!, callback: nil)
         if (ModelManager.shared.player?.playbackState.isPlaying)! {
             sender.setImage(#imageLiteral(resourceName: "Play-48"), for: .normal)
+            ModelManager.shared.isPlaying = false
         } else {
             sender.setImage(#imageLiteral(resourceName: "Pause-48"), for: .normal)
+            ModelManager.shared.isPlaying = true
         }
     }
     
     @IBAction func fowardButtonPressed(_ sender: UIButton) {
         ModelManager.shared.player?.skipNext(nil)
         ModelManager.shared.nowPlayingIndex += 1
-        if ModelManager.shared.nowPlayingIndex < ModelManager.shared.nowPlaying.count {
+        if ModelManager.shared.nowPlayingIndex < ModelManager.shared.nowPlayingSongs.count {
             playPauseButton.setImage(#imageLiteral(resourceName: "Pause-48"), for: .normal)
-            artistImageView.image = UIImage(data: ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].image! as Data)
-            songLabel.text = ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].name! + " - " + ModelManager.shared.nowPlayingSongs[ModelManager.shared.nowPlayingIndex].artist! + " "
-            songLabel.restartLabel()
+            setSongDetails()
             ModelManager.shared.playMusic(ModelManager.shared.nowPlayingIndex)
         }
     }
     
+    @IBAction func facebookButtonPressed(_ sender: UIButton) {
+       presentSocialMedia(SLServiceTypeFacebook)
+    }
     
-    @IBAction func facebookShareButtonPressed(_ sender: UIButton) {
-        if dialog.canShow() {
-            dialog.content = ModelManager.shared.content
-            dialog.delegate = self
-            dialog.show()
+    @IBAction func twitterButtonPressed(_ sender: UIButton) {
+        if (Twitter.sharedInstance().sessionStore.existingUserSessions().count != 0) {
+            // App must have at least one logged-in user to compose a Tweet
+            presentSocialMedia(SLServiceTypeTwitter)
+        } else {
+            // Log in, and then check again
+            Twitter.sharedInstance().logIn { session, error in
+                if session != nil { // Log in succeeded
+                    self.presentSocialMedia(SLServiceTypeTwitter)
+                } else {
+                    let alert = UIAlertController(title: "No Twitter Accounts Available", message: "You must log in before presenting a composer.", preferredStyle: .alert)
+                    self.present(alert, animated: false, completion: nil)
+                }
+            }
         }
     }
     
     @IBAction func mapTapGestureMade(_ sender: UITapGestureRecognizer) {
-        if !(tabBarController?.tabBar.items?[2].isEnabled)! {
-            tabBarController?.tabBar.items?[2].isEnabled = true
+        if !(self.tabBarController?.tabBar.items?[2].isEnabled)! {
+            self.tabBarController?.tabBar.items?[2].isEnabled = true
         }
         let point = sender.location(in: self.worldMapView)
         let coordinates = self.worldMapView.convert(point, toCoordinateFrom: self.worldMapView)
@@ -108,14 +134,5 @@ class WorldMapViewController: UIViewController, FBSDKAppInviteDialogDelegate {
                 }
             }
         })
-    }
-    
-    //MARK FBSDKAppInviteDialogDelegate
-    func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [AnyHashable : Any]!) {
-        print(results)
-    }
-    
-    func appInviteDialog(_ appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: Error!) {
-        
     }
 }

@@ -28,10 +28,6 @@ class PlaylistTableViewController: UITableViewController {
         ModelManager.shared.fetchPlaylists(playlistName: "")
         playlistTableView.reloadData()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,10 +35,6 @@ class PlaylistTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ModelManager.shared.playlists.count
@@ -57,16 +49,16 @@ class PlaylistTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ModelManager.shared.fetchSongs(playlist: ModelManager.shared.playlists[indexPath.row])
         if firstLoad {
-            guard let tabBarItemCount = tabBarController?.tabBar.items?.count else { return }
+            guard let tabBarItemCount = self.tabBarController?.tabBar.items?.count else { return }
             for tabBarItemIndex in 0..<tabBarItemCount {
-                tabBarController?.tabBar.items?[tabBarItemIndex].isEnabled = true
+                self.tabBarController?.tabBar.items?[tabBarItemIndex].isEnabled = true
             }
             firstLoad = false
             DispatchQueue.global().async {
                 ModelManager.shared.addSongsToNowPlaying(ModelManager.shared.playlists[indexPath.row])
             }
         } else {
-            let alert = UIAlertController(title: "Add Playlist", message: "Would you like to add this playlist to Now Playing?", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "Add Playlist", message: "Would you like to add this playlist to Now Playing?", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {
                 alert in
                 ModelManager.shared.addSongsToNowPlaying(ModelManager.shared.playlists[indexPath.row])
@@ -90,38 +82,31 @@ class PlaylistTableViewController: UITableViewController {
         }
     }
     
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            do {
+                ModelManager.shared.fetchSongs(playlist: ModelManager.shared.playlists[indexPath.row])
+                for song in ModelManager.shared.playlistSongs {
+                        ModelManager.shared.context.delete(song)
+                }
+                ModelManager.shared.playlistSongs.removeAll()
+                ModelManager.shared.context.delete(ModelManager.shared.playlists[indexPath.row])
+                ModelManager.shared.playlists.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                try ModelManager.shared.context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }

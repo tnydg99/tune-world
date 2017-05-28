@@ -71,11 +71,11 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
         ModelManager.shared.handleNewSession()
         ModelManager.shared.fetchPlaylists(playlistName: "")
         if ModelManager.shared.playlists.count == 0 {
-            tabBarController?.tabBar.items?[1].isEnabled = true
-            tabBarController?.selectedViewController = tabBarController?.viewControllers?[1]
+            self.tabBarController?.tabBar.items?[1].isEnabled = true
+            self.tabBarController?.selectedViewController = tabBarController?.viewControllers?[1]
         } else {
-            tabBarController?.tabBar.items?[2].isEnabled = true
-            tabBarController?.selectedViewController = tabBarController?.viewControllers?[2]
+            self.tabBarController?.tabBar.items?[2].isEnabled = true
+            self.tabBarController?.selectedViewController = tabBarController?.viewControllers?[2]
         }
     }
     

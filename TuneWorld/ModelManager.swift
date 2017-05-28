@@ -9,22 +9,23 @@
 import UIKit
 import CoreData
 import AVFoundation
-import FBSDKShareKit
+import TwitterKit
 
 class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     static var shared = ModelManager()
     var musicAdapter = MusicAdapter()
     var playlistSongs : [Song] = []
     var playlists : [Playlist] = []
-    var nowPlaying : [String] = []
     var nowPlayingSongs : [Song] = []
     let kCLientID = "492517f79b4445a693a31aed968fe484"
     let kCallbackURL = "tuneworld://callback"
     let kSessionNotificationName = Notification.Name("sessionUpdated")
     let kMusicAddedNotificationName = Notification.Name("musicAdded")
+    let kMusicChangedNotificationName = Notification.Name("musicChanged")
+    let kPortaitViewOnlyControllerIndex = 3
+    var isPlaying : Bool = false
     var player = SPTAudioStreamingController.sharedInstance()
     var nowPlayingIndex : Int = 0
-    var content = FBSDKAppInviteContent()
     var context : NSManagedObjectContext {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return self.context
@@ -32,7 +33,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         return appDelegate.persistentContainer.viewContext
     }
 
-    private override init () { content.appLinkURL = URL(string: "https://fb.me/1698718100423489") }
+    private override init () {  }
     
     func fetchPlaylists(playlistName: String) {
         do {
@@ -90,30 +91,11 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         for song in self.playlistSongs {
             guard let name = song.name?.replacingOccurrences(of: " ", with: "+"), let artist = song.artist?.replacingOccurrences(of: " ", with: "+") else { return }
             let url = "https://api.spotify.com/v1/search?query=track%3A\(String(describing: name))+artist%3A\(String(describing: artist))&type=track&offset=0&limit=1"
-        DispatchQueue.global().async {
+            DispatchQueue.global().async {
                 self.musicAdapter.getSpotifyMusic(url: url, playlist: playlist)
             }
         }
     }
-//
-//        if (player == nil) {
-//            player = SPTAudioStreamingController.sharedInstance()
-//            do {
-//                try player?.start(withClientId: kCLientID, audioController: nil, allowCaching: true)
-//                player?.delegate = self;
-//                player?.playbackDelegate = self;
-//                player?.diskCache = SPTDiskCache.init(capacity: 1024 * 1024 * 64)
-//                player?.login(withAccessToken: auth?.session.accessToken)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        } else {
-//            player = nil;
-//            let alert = UIAlertController(title: "Error Initializing", message: "Error", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//            alert.present(alert, animated: true, completion: nil)
-//            closeSession()
-//        }
     
     func closeSession() {
         let auth = SPTAuth.defaultInstance()
@@ -121,19 +103,22 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func playMusic(_ index: Int) {
-        if nowPlaying.count > 0 { //&& !(player?.playbackState.isPlaying)! {
-                player?.playSpotifyURI(nowPlaying[index], startingWith: 0, startingWithPosition: 0, callback: {
-                    error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
+        if nowPlayingSongs.count > 0 {
+            player?.playSpotifyURI(nowPlayingSongs[index].uri!, startingWith: 0, startingWithPosition: 0, callback: {
+                error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
             })
+            isPlaying = true
+            NotificationCenter.default.post(name: self.kMusicChangedNotificationName, object: nil)
         }
     }
     
-    //MARK
+    //MARK 
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
+        
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
@@ -144,7 +129,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     func audioStreamingDidLogout(_ audioStreaming: SPTAudioStreamingController!) {
         closeSession()
     }
-    
+}
     
 //    func activateAudioSession() {
 //        var audioSession: AVAudioSession?
@@ -168,4 +153,23 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
 //            print(error)
 //        }
 //    }
-}
+    
+    //
+    //        if (player == nil) {
+    //            player = SPTAudioStreamingController.sharedInstance()
+    //            do {
+    //                try player?.start(withClientId: kCLientID, audioController: nil, allowCaching: true)
+    //                player?.delegate = self;
+    //                player?.playbackDelegate = self;
+    //                player?.diskCache = SPTDiskCache.init(capacity: 1024 * 1024 * 64)
+    //                player?.login(withAccessToken: auth?.session.accessToken)
+    //            } catch {
+    //                print(error.localizedDescription)
+    //            }
+    //        } else {
+    //            player = nil;
+    //            let alert = UIAlertController(title: "Error Initializing", message: "Error", preferredStyle: .alert)
+    //            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+    //            alert.present(alert, animated: true, completion: nil)
+    //            closeSession()
+    //        }
