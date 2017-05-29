@@ -11,6 +11,7 @@ import UIKit
 class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
+        //when the view loads, enable the login tab and add the music added obserevr
         super.viewDidLoad()
         guard let tabBarItemCount = self.tabBar.items?.count else { return }
         for tabBarItemIndex in 1..<tabBarItemCount {
@@ -23,13 +24,9 @@ class TabBarViewController: UITabBarController {
         self.navigationController?.hidesBarsOnSwipe = true
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func musicAdded(_ notification: Notification) {
+        //when music is added, start playing music from the queue
         if ModelManager.shared.player?.playbackState == nil {
             ModelManager.shared.player?.setRepeat(.off, callback: nil)
             ModelManager.shared.player?.setIsPlaying(true, callback: nil)
@@ -39,15 +36,4 @@ class TabBarViewController: UITabBarController {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
 }

@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import AVFoundation
-import TwitterKit
 
 class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     static var shared = ModelManager()
@@ -36,6 +35,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     private override init () {  }
     
     func fetchPlaylists(playlistName: String) {
+        //fetch playlist(s) from core data
         do {
             let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Playlist")
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -51,6 +51,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func fetchSongs(playlist: Playlist) {
+        //fetch songs from core data
         do {
             let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Song")
             let sortByNameDescriptor = NSSortDescriptor(key: "rank", ascending: true)
@@ -65,6 +66,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func formatPlaylistName(country: String) -> String {
+        //format the playlist name to indicate what playlist is being added
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
@@ -74,6 +76,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func handleNewSession() {
+        //handle new session for spotify
         let auth = SPTAuth.defaultInstance()
         do {
             try player?.start(withClientId: kCLientID, audioController: nil, allowCaching: true)
@@ -88,6 +91,7 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func addSongsToNowPlaying(_ playlist: Playlist) {
+        //fetch songs from spotify to add to the now playing list
         for song in self.playlistSongs {
             guard let name = song.name?.replacingOccurrences(of: " ", with: "+"), let artist = song.artist?.replacingOccurrences(of: " ", with: "+") else { return }
             let url = "https://api.spotify.com/v1/search?query=track%3A\(String(describing: name))+artist%3A\(String(describing: artist))&type=track&offset=0&limit=1"
@@ -98,11 +102,13 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
     }
     
     func closeSession() {
+        //close the spotify session once done
         let auth = SPTAuth.defaultInstance()
         auth?.session = nil
     }
     
     func playMusic(_ index: Int) {
+        //play music in the app
         if nowPlayingSongs.count > 0 {
             player?.playSpotifyURI(nowPlayingSongs[index].uri!, startingWith: 0, startingWithPosition: 0, callback: {
                 error in
@@ -115,61 +121,21 @@ class ModelManager: NSObject, SPTAudioStreamingDelegate, SPTAudioStreamingPlayba
         }
     }
     
-    //MARK 
+    //MARK SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStartPlayingTrack trackUri: String!) {
         
     }
     
     func audioStreaming(_ audioStreaming: SPTAudioStreamingController!, didStopPlayingTrack trackUri: String!) {
+        //play the next song once one ends
         nowPlayingIndex += 1
         playMusic(nowPlayingIndex)
     }
     
     func audioStreamingDidLogout(_ audioStreaming: SPTAudioStreamingController!) {
+        //close the session once a user logs out
         closeSession()
     }
 }
-    
-//    func activateAudioSession() {
-//        var audioSession: AVAudioSession?
-//        do {
-//            try audioSession?.setCategory("AVAudioSessionCategoryPlayback")
-//        } catch {
-//            print(error)
-//        }
-//        do {
-//            try audioSession?.setActive(true)
-//        } catch {
-//            print(error)
-//        }
-//    }
-//    
-//    func deactivateAudioSession() {
-//        var audioSession: AVAudioSession?
-//        do {
-//            try audioSession?.setActive(false)
-//        } catch {
-//            print(error)
-//        }
-//    }
-    
-    //
-    //        if (player == nil) {
-    //            player = SPTAudioStreamingController.sharedInstance()
-    //            do {
-    //                try player?.start(withClientId: kCLientID, audioController: nil, allowCaching: true)
-    //                player?.delegate = self;
-    //                player?.playbackDelegate = self;
-    //                player?.diskCache = SPTDiskCache.init(capacity: 1024 * 1024 * 64)
-    //                player?.login(withAccessToken: auth?.session.accessToken)
-    //            } catch {
-    //                print(error.localizedDescription)
-    //            }
-    //        } else {
-    //            player = nil;
-    //            let alert = UIAlertController(title: "Error Initializing", message: "Error", preferredStyle: .alert)
-    //            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-    //            alert.present(alert, animated: true, completion: nil)
-    //            closeSession()
-    //        }
+

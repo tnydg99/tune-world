@@ -13,6 +13,7 @@ class PlaylistTableViewController: UITableViewController {
     var firstLoad : Bool = false
     @IBOutlet var playlistTableView: UITableView!
     override func viewDidLoad() {
+        //when view loads show the playlist alert
         super.viewDidLoad()
         self.navigationItem.title = "Playlists"
         firstLoad = true
@@ -24,31 +25,31 @@ class PlaylistTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //when the view appears, fetch the playlists from core data and reload the table
         super.viewWillAppear(animated)
         ModelManager.shared.fetchPlaylists(playlistName: "")
         playlistTableView.reloadData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //playlist count
         return ModelManager.shared.playlists.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //display each playlist created in core data
         let cell = tableView.dequeueReusableCell(withIdentifier: "playlistCell", for: indexPath)
         cell.textLabel?.text = ModelManager.shared.playlists[indexPath.row].name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //when a playlist is selected, fetch songs from core data
         ModelManager.shared.fetchSongs(playlist: ModelManager.shared.playlists[indexPath.row])
         if firstLoad {
+            //if this is the first time showing this view, the playlist selected will be added to the now playing track list and other pages will be viewable
             guard let tabBarItemCount = self.tabBarController?.tabBar.items?.count else { return }
             for tabBarItemIndex in 0..<tabBarItemCount {
                 self.tabBarController?.tabBar.items?[tabBarItemIndex].isEnabled = true
@@ -58,6 +59,7 @@ class PlaylistTableViewController: UITableViewController {
                 ModelManager.shared.addSongsToNowPlaying(ModelManager.shared.playlists[indexPath.row])
             }
         } else {
+            //otherwise ask the user if they would like to add more songs to the playlist.
             let alert = UIAlertController(title: "Add Playlist", message: "Would you like to add this playlist to Now Playing?", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: {
                 alert in
@@ -75,6 +77,7 @@ class PlaylistTableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //assign indexpath of playlists table for view to show
         if segue.identifier == "toAlbumsSegue" {
             let destination = segue.destination as? AlbumTableViewController
             let index = sender as! IndexPath
@@ -93,7 +96,7 @@ class PlaylistTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // Delete the row from the data source (playlist + songs) and core data
             do {
                 ModelManager.shared.fetchSongs(playlist: ModelManager.shared.playlists[indexPath.row])
                 for song in ModelManager.shared.playlistSongs {

@@ -12,9 +12,10 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
 
     var firstLoad : Bool = false
     var authViewController : UIViewController?
-    
     @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
+        //when the view loads, register the session observer
         super.viewDidLoad()
         self.navigationItem.title = "Login"
         NotificationCenter.default.addObserver(self, selector: #selector(sessionUpdated(_:)), name: ModelManager.shared.kSessionNotificationName, object: nil)
@@ -22,32 +23,16 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        //when the view appears, make sure that the session is not erroring out
         super.viewWillAppear(animated)
         let auth = SPTAuth.defaultInstance()
         if auth?.session == nil {
             return
         }
-        
-        if (auth?.session.isValid())! && firstLoad {
-            //code login and allow player to play
-            //showPlayer()
-            return
-        }
-        
-        if (auth?.hasTokenRefreshService)! {
-            //code login and allow player to play
-            //renewTokenAndShowPlayer
-            return
-        }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     func authViewControllerWithURL(url: URL) -> UIViewController {
+        //display authentication view in safari
         var viewController : UIViewController?
         let safari = SFSafariViewController(url: url)
         safari.delegate = self
@@ -57,16 +42,16 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
     
     func sessionUpdated(_ notification: Notification) {
+        //once the session has been authenticated, navigate to other views
         let auth = SPTAuth.defaultInstance()
         presentedViewController?.dismiss(animated: true, completion: nil)
         if auth?.session != nil && (auth?.session.isValid())! {
             showPlayer()
-        } else {
-            //failed login
         }
     }
 
     func showPlayer() {
+        //navigate to other views after authentication (either the map view or the playlist view)
         firstLoad = false
         ModelManager.shared.handleNewSession()
         ModelManager.shared.fetchPlaylists(playlistName: "")
@@ -80,6 +65,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
     
     func openLoginPage() {
+        //present the safari view controller if it is supprted
         let auth = SPTAuth.defaultInstance()
         if SPTAuth.supportsApplicationAuthentication() {
             UIApplication.shared.open((auth?.spotifyAppAuthenticationURL())!, options: [:], completionHandler: nil)
@@ -91,6 +77,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
     
     func renewTokenAndShowPlayer() {
+        // if continuous token handling is enabled, then renew session and show the player.
         let auth = SPTAuth.defaultInstance()
         auth?.renewSession(auth?.session, callback: {
         (error, session) in
@@ -110,6 +97,7 @@ class LoginViewController: UIViewController, SFSafariViewControllerDelegate {
     }
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
+        //navigate to safari
         openLoginPage()
     }
 

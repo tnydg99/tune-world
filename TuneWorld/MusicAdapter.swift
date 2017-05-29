@@ -15,6 +15,7 @@ class MusicAdapter: NSObject {
     typealias JSONDictionary = [String:AnyObject]
     
     func getSpotifyMusic(url : String, playlist: Playlist) {
+        //fetch data from spotify
         Alamofire.request(url).responseJSON(completionHandler: {
             response in
             switch response.result {
@@ -28,6 +29,7 @@ class MusicAdapter: NSObject {
     }
     
     func getLastFMData(url : String, playlistName: String) {
+        //fetch data based on what playlist is passed through
         let fetchRequest : NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Playlist")
         fetchRequest.predicate = NSPredicate(format: "name == %@", playlistName)
         do {
@@ -45,6 +47,7 @@ class MusicAdapter: NSObject {
     }
     
     func parseSpotifyData(url : String, data: Data, playlist: Playlist) {
+        //loop through the spotify search api and fetch data based on the previously passed in url. check to see if the fetched data from core data to determine what song to search matches the searched song and if so, add the spotify uri to core data.
         do {
             var artistName : String?
             var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary
@@ -86,6 +89,7 @@ class MusicAdapter: NSObject {
     }
     
     func parseLastFMData(data: Data, playlistName: String) {
+        //fetch data from the last.fm api based on the url that is passed and add the songs from the api into the playlist set in core data
         do {
             var playlist : Playlist?
             var rootJSONDictionary = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? JSONDictionary

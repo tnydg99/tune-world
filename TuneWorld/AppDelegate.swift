@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
     var authViewController: UIViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        //set initial values for the spotify authentication and twitter authentication
         Twitter.sharedInstance().start(withConsumerKey:"5ofREuOLTR7ndg8WexSKPgGhr", consumerSecret:"8IEUSazR8nFxBjPl7eRpB6qrmO3euJfnqmfmMkRyvlCbCQxrBF")
         // Override point for customization after application launch.
         auth = SPTAuth.defaultInstance()
@@ -32,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        //when a url is opened, make sure that the url resolves correctly for both twitter and spotify
         if Twitter.sharedInstance().application(app, open:url, options: options) {
             return true
         }
@@ -73,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTAudioStreamingDelegate
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        ModelManager.shared.closeSession()
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }

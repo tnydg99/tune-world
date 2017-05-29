@@ -26,7 +26,6 @@
 		D989222B1EDB5C7D00CCC04A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989222A1EDB5C7D00CCC04A /* QuartzCore.framework */; };
 		D98AC12B1ECEA7B4004DBC29 /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */; };
 		D98AC12D1ECEA7CE004DBC29 /* WorldMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */; };
-		D98AC1311ECF42D0004DBC29 /* AddPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1301ECF42D0004DBC29 /* AddPlaylistViewController.swift */; };
 		D98AC1331ECF43BE004DBC29 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */; };
 		D98AC1351ECF6B2A004DBC29 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1341ECF6B2A004DBC29 /* ModelManager.swift */; };
 		D98AC1371ED0FB42004DBC29 /* MusicAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */; };
@@ -85,7 +84,6 @@
 		D989222A1EDB5C7D00CCC04A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 		D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldMapViewController.swift; sourceTree = "<group>"; };
-		D98AC1301ECF42D0004DBC29 /* AddPlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlaylistViewController.swift; sourceTree = "<group>"; };
 		D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewController.swift; sourceTree = "<group>"; };
 		D98AC1341ECF6B2A004DBC29 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicAdapter.swift; sourceTree = "<group>"; };
@@ -168,22 +166,11 @@
 		CED3B5501ECA56C700D1FBD4 /* TuneWorld */ = {
 			isa = PBXGroup;
 			children = (
-				D98AC1301ECF42D0004DBC29 /* AddPlaylistViewController.swift */,
-				D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */,
-				CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */,
-				CED3B5551ECA56C700D1FBD4 /* Main.storyboard */,
-				D98AC1341ECF6B2A004DBC29 /* ModelManager.swift */,
-				D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */,
+				D989222D1EDB822800CCC04A /* Model */,
+				D989222E1EDB828400CCC04A /* View */,
+				D989222C1EDB820100CCC04A /* Controller */,
 				CED3B55B1ECA56C700D1FBD4 /* Assets.xcassets */,
-				CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */,
-				D98AC1381ED1FB11004DBC29 /* LoginViewController.swift */,
 				CED3B5601ECA56C700D1FBD4 /* Info.plist */,
-				D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */,
-				D93285E11ED4AFD600563A29 /* SongViewController.swift */,
-				D93285DF1ED3DA7F00563A29 /* TabBarViewController.swift */,
-				CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */,
-				CED3B5581ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld */,
-				D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */,
 			);
 			path = TuneWorld;
 			sourceTree = "<group>";
@@ -204,6 +191,40 @@
 				CED3B5761ECA56C700D1FBD4 /* Info.plist */,
 			);
 			path = TuneWorldUITests;
+			sourceTree = "<group>";
+		};
+		D989222C1EDB820100CCC04A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D98AC12A1ECEA7B4004DBC29 /* AlbumTableViewController.swift */,
+				D98AC1381ED1FB11004DBC29 /* LoginViewController.swift */,
+				D98AC1321ECF43BE004DBC29 /* PlaylistTableViewController.swift */,
+				D93285E11ED4AFD600563A29 /* SongViewController.swift */,
+				D93285DF1ED3DA7F00563A29 /* TabBarViewController.swift */,
+				D98AC12C1ECEA7CE004DBC29 /* WorldMapViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D989222D1EDB822800CCC04A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CED3B5511ECA56C700D1FBD4 /* AppDelegate.swift */,
+				D98AC1341ECF6B2A004DBC29 /* ModelManager.swift */,
+				D98AC1361ED0FB42004DBC29 /* MusicAdapter.swift */,
+				CE67DC331ECE486700151478 /* TuneWorld-Bridging-Header.h */,
+				CED3B5581ECA56C700D1FBD4 /* TuneWorld.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D989222E1EDB828400CCC04A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CED3B5551ECA56C700D1FBD4 /* Main.storyboard */,
+				CED3B55D1ECA56C700D1FBD4 /* LaunchScreen.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		E0AA23A6AA89F70A20BA0FBA /* Pods */ = {
@@ -507,7 +528,6 @@
 				D93285E01ED3DA7F00563A29 /* TabBarViewController.swift in Sources */,
 				D98AC12B1ECEA7B4004DBC29 /* AlbumTableViewController.swift in Sources */,
 				D98AC12D1ECEA7CE004DBC29 /* WorldMapViewController.swift in Sources */,
-				D98AC1311ECF42D0004DBC29 /* AddPlaylistViewController.swift in Sources */,
 				D98AC1351ECF6B2A004DBC29 /* ModelManager.swift in Sources */,
 				CED3B5521ECA56C700D1FBD4 /* AppDelegate.swift in Sources */,
 				D98AC1371ED0FB42004DBC29 /* MusicAdapter.swift in Sources */,
