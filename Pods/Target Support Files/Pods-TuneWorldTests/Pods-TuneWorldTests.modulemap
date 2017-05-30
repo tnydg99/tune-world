@@ -1,0 +1,6 @@
+framework module Pods_TuneWorldTests {
+  umbrella header "Pods-TuneWorldTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

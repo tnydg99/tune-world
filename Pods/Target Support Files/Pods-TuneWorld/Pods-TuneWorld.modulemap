@@ -1,0 +1,6 @@
+framework module Pods_TuneWorld {
+  umbrella header "Pods-TuneWorld-umbrella.h"
+
+  export *
+  module * { export * }
+}
